@@ -34,6 +34,9 @@ def create_app(test_config=None):
     app.register_blueprint(main.bp)
     app.register_blueprint(auth.bp)
 
-   
+     # Create Database Models
+    with app.app_context():
+        db.create_all()
+
     return app
 
