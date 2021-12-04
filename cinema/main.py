@@ -15,10 +15,14 @@ bp = Blueprint("main", __name__)
 # @flask_login.login_required
 # MAIN VIEW OPEN FOR UNAUTHENTICATED USERS
 def index():
-    pmovies = model.Projection.query.order_by(model.Projection.day.desc()).limit(10).all()
+    current_day = date.today().strftime('%Y-%m-%d')
+    pmovies = model.Projection.query.filter(model.Projection.day >= current_day).limit(10).all()
+    # movies = []
+    # for p in pmovies:
+    #     movies.append(mod)
     all_movies = model.Movie.query.all()
     users = model.User.query.all()
-    current_day = date.today().strftime('%Y-%m-%d')
+    
 
-    return render_template("main/index.html", all_movies=all_movies, users=users, current_day=current_day, pmovies=pmovies)
+    return render_template("main/index.html", movies=all_movies, users=users, pmovies=pmovies)
 

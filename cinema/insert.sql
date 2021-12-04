@@ -15,8 +15,8 @@ insert into screen VALUES
 (71, "H3", 40);
 
 insert into projection VALUES
-(111, CURRENT_TIMESTAMP, 11, 91),
-(222, CURRENT_TIMESTAMP, 22, 81),
-(333, CURRENT_TIMESTAMP, 33, 71);
+(111, '2021-12-07', 11, 91),
+(222, '2021-12-06', 22, 81),
+(333, '2021-12-05', 33, 71);
 
 
