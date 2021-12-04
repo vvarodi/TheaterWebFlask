@@ -1,6 +1,8 @@
 from . import db
 import flask_login
 
+
+
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(128), unique=True, nullable=False)
@@ -9,6 +11,7 @@ class User(flask_login.UserMixin, db.Model):
 
     booked = db.relationship('MovieReservation', backref='user', lazy=True)
     # role = 1 manager 0 user
+
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(240), unique=False, nullable=False)
