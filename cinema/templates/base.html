@@ -11,11 +11,20 @@
             <h1 class="header-title">Cinema</h1>
 
             {% if current_user.is_authenticated: %}
-            <div class="header-right">
-                <a href="{{ url_for('main.index') }}">Home</a>
-                <a href="{{ url_for('main.index') }}">Profile - {{current_user.name}} </a>
-                <a href="{{ url_for('auth.logout') }}">Log out</a>
-            </div>
+                {% if current_user.role == current_user.role.__class__.manager %}
+                <div class="header-right">
+                    <a href="{{ url_for('main.index') }}">Home</a>
+                    <a href="{{ url_for('main.manager') }}">Manager</a>
+                    <a href="{{ url_for('auth.logout') }}">Log out</a>
+                </div>
+                {% endif %}
+                {% if current_user.role == current_user.role.__class__.customer %}
+                <div class="header-right">
+                    <a href="{{ url_for('main.index') }}">Home</a>
+                    <a href="{{ url_for('main.index') }}">Profile - {{current_user.name}} </a>
+                    <a href="{{ url_for('auth.logout') }}">Log out</a>
+                </div>
+                {% endif %}
             {% else %}
             
             <div class="header-right">

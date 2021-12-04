@@ -1,0 +1,5 @@
+{% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        <div class="notification"> <br>{{ message }}</div>
+    {% endfor %}
+{% endwith %}

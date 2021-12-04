@@ -9,10 +9,6 @@
         <div><input type="submit" value="Login"/></div>
     </form>
 
-    {% with messages = get_flashed_messages() %}
-        {% for message in messages %}
-            <div class="notification"> <br>{{ message }}</div>
-        {% endfor %}
-    {% endwith %}
+    {% include 'auth/error.html' %}
 
 {% endblock %}

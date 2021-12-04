@@ -1,6 +1,10 @@
 from . import db
 import flask_login
+import enum
 
+class UserRole(enum.Enum):
+    customer = 1
+    manager = 2
 
 
 class User(flask_login.UserMixin, db.Model):
@@ -8,9 +12,10 @@ class User(flask_login.UserMixin, db.Model):
     email = db.Column(db.String(128), unique=True, nullable=False)
     name = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    role = db.Column(db.Enum(UserRole), nullable=False)
 
     booked = db.relationship('MovieReservation', backref='user', lazy=True)
-    # role = 1 manager 0 user
+    
 
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -17,17 +17,21 @@ def signup_post():
     email = request.form.get("email")
     username = request.form.get("username")
     password = request.form.get("password")
+    role = request.form.get("role")
     # Check that passwords are equal
     if password != request.form.get("password_repeat"):
         flash("Sorry, passwords are different")
         return redirect(url_for("auth.signup"))
     # Check if the email is already at the database
     user = model.User.query.filter_by(email=email).first()
+    
+    # same email for both roles possible???
     if user:
         flash("Sorry, the email you provided is already registered")
         return redirect(url_for("auth.signup"))
+ 
     password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
-    new_user = model.User(email=email, name=username, password=password_hash)
+    new_user = model.User(email=email, name=username, password=password_hash, role=role)
     db.session.add(new_user)
     db.session.commit()
     flash("You've successfully signed up!")
@@ -64,6 +68,8 @@ def login_post():
         return redirect(url_for("auth.login"))
 
 @bp.route("/logout")
+@flask_login.login_required
 def logout():
     flask_login.logout_user()
+    flash ('You have been logged out')
     return redirect(url_for("auth.login"))
