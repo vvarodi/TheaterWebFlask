@@ -35,7 +35,8 @@ class Screen(db.Model):
 
 class Projection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.DateTime(), nullable=False)
+    #time = db.Column(db.DateTime(), nullable=False)
+    day = db.Column(db.Date(), nullable=False)
     movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'))
     screen_id = db.Column(db.Integer, db.ForeignKey('screen.id'))
 

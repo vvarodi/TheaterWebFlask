@@ -1,4 +1,4 @@
-import datetime
+from datetime import date
 import dateutil.tz
 
 from flask import Blueprint, render_template
@@ -15,30 +15,10 @@ bp = Blueprint("main", __name__)
 # @flask_login.login_required
 # MAIN VIEW OPEN FOR UNAUTHENTICATED USERS
 def index():
-    movies = model.Movie.query.all()
+    pmovies = model.Projection.query.order_by(model.Projection.day.desc()).limit(10).all()
+    all_movies = model.Movie.query.all()
     users = model.User.query.all()
-    return render_template("main/index.html", posts=movies, users=users)
+    current_day = date.today().strftime('%Y-%m-%d')
 
+    return render_template("main/index.html", all_movies=all_movies, users=users, current_day=current_day, pmovies=pmovies)
 
-
-
-
-# Only view for manager user
-from functools import wraps
-from flask import g, request, redirect, url_for
-from flask_login import current_user
-
-def manager_only(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if current_user.role != model.UserRole.manager:
-            return redirect(url_for('auth.login', next=request.url))
-        if current_user.role == model.UserRole.manager:
-            return f(*args, **kwargs)
-    return decorated_function
-
-@bp.route("/manager")
-@flask_login.login_required
-@manager_only
-def manager():
-    return render_template("manager.html")

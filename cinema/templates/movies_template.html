@@ -1,5 +1,5 @@
-<div class="row">
-    {% for post in posts %}
-        {% include 'movie_template.html' %}
+<div class="horizontal-movies">
+    {% for movie in movies %}
+    <a href="#"><img src={{movie.img}}></a>
     {% endfor %}
 </div>

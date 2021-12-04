@@ -32,8 +32,10 @@ def create_app(test_config=None):
     # register blueprints
     from . import main
     from . import auth
+    from . import manager
     app.register_blueprint(main.bp)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(manager.bp)
 
      # Create Database Models
     with app.app_context():
