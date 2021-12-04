@@ -6,8 +6,24 @@
         {% include 'movies_template.html' %}
     </section>
     <section>
-        <h2>Movies Projections Coming Soon</h2>
-        {% include 'movies_by_date.html' %}
+        <h2>Today Projections</h2>
+        {% if tmovies | length > 0 %}
+            {% set movies = tmovies %}
+                {% include 'movies_by_date.html' %}
+          
+        {% else%}
+            <p>THERE ARE NO PROJECTIONS TODAY</p>
+        {% endif %}
+    </section>
+    <section>
+        <h2>Coming Soon</h2>
+        {% if pmovies | length > 0 %}
+            {% set movies = pmovies %}
+                {% include 'movies_by_date.html' %}
+            
+        {% else%}
+            <p>THERE ARE NO PROJECTIONS COMING SOON</p>
+        {% endif %}
     </section>
     <!-- Borrar luego debugg users -->
     <section>

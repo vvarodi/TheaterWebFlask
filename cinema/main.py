@@ -17,6 +17,7 @@ bp = Blueprint("main", __name__)
 def index():
     current_day = date.today().strftime('%Y-%m-%d')
     pmovies = model.Projection.query.filter(model.Projection.day >= current_day).limit(10).all()
+    tmovies = model.Projection.query.filter(model.Projection.day == current_day).all()
     # movies = []
     # for p in pmovies:
     #     movies.append(mod)
@@ -24,5 +25,5 @@ def index():
     users = model.User.query.all()
     
 
-    return render_template("main/index.html", movies=all_movies, users=users, pmovies=pmovies)
+    return render_template("main/index.html", movies=all_movies, users=users, pmovies=pmovies, tmovies=tmovies)
 

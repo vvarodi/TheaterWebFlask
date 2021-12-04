@@ -1,5 +1,4 @@
-
-
+{% if pmovies | length > 0 %}
 <table class="table-movies">
     <thead>
     <tr>
@@ -9,7 +8,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for movie in movies %}
+    {% for movie in pmovies %}
     <tr>
         <td>{{ movie.movie.title }}</td>
         <td>{{ movie.day }}</td>
@@ -18,4 +17,6 @@
     {% endfor %}
     </tbody>
 </table>
-
+{% else%}
+<p>THERE ARE NO PROJECTIONS COMING SOON</p>
+{% endif %}
