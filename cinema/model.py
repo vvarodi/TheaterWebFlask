@@ -20,10 +20,10 @@ class User(flask_login.UserMixin, db.Model):
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(240), unique=False, nullable=False)
-    synopsis = db.Column(db.String(512), unique=False, nullable=False)
     duration = db.Column(db.Integer, unique=False, nullable=False)
     director = db.Column(db.String(60), unique=False, nullable=False)
     main_cast = db.Column(db.String(512), unique=False, nullable=False)
+    synopsis = db.Column(db.String(512), unique=False, nullable=False)
     img = db.Column(db.String(512))
 
     projected = db.relationship('Projection', backref='movie', lazy=True)
@@ -37,8 +37,8 @@ class Screen(db.Model):
 
 class Projection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.Time(), unique=False, nullable=False)
     day = db.Column(db.Date(), unique=False, nullable=False)
+    time = db.Column(db.Time(), unique=False, nullable=False)
     movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'))
     screen_id = db.Column(db.Integer, db.ForeignKey('screen.id'))
 
