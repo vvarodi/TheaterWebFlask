@@ -14,7 +14,8 @@
                 {% if current_user.role == current_user.role.__class__.manager %}
                 <div class="header-right">
                     <a href="{{ url_for('main.index') }}">Home</a>
-                    <a href="{{ url_for('main.manager') }}">Manager</a>
+                    <a href="{{ url_for('manager.manager') }}">Manager</a>
+                    <a href="{{ url_for('manager.schedule') }}">Schedule Showtimes</a>
                     <a href="{{ url_for('auth.logout') }}">Log out</a>
                 </div>
                 {% endif %}

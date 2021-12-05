@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{{ url_for('manager.edit', id=projection.id) }}" method="post" id="edit">
+
+<table>
+     <thead>
+       <tr>
+           <th>Movie ID</th>
+           <th>Screen ID</th>
+           <th>Day</th>
+           <th>Time</th>
+       </tr>
+       </thead>    
+       <tbody>
+            <tr>
+                <td>{{projection.movie_id}}<br>({{projection.movie.title}})</td>
+                <td>{{projection.screen_id}}<br>({{projection.screen.name}})</td>
+                <td>{{projection.day}}</td>
+                <td>{{projection.time}}</td>
+            </tr>
+            <tr>
+                
+
+                <td><label for="cars">Choose a movie:</label>
+                    <select name="movie">
+                    {% for movie in movies %}
+                    <option value="{{movie.id}}">{{movie.title}}</option>
+                    
+                    {% endfor %}
+                    </select>
+                </td>
+                <td>{{projection.screen_id}}<br>({{projection.screen.name}})</td>
+                <td>{{projection.day}}</td>
+                <td>{{projection.time}}</td>
+
+
+                
+            </tr>
+       </tbody>
+</table>
+
+
+<input type="submit" value="EDIT" />
+
+</form>
+{% endblock %}

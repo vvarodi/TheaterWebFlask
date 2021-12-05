@@ -4,6 +4,8 @@ from flask import request, redirect, url_for, render_template, Blueprint
 from flask_login import current_user
 import flask_login
 from . import model
+from datetime import date
+from . import db 
 
 bp = Blueprint("manager", __name__)
 
@@ -16,8 +18,51 @@ def manager_only(f):
             return f(*args, **kwargs)
     return decorated_function
 
-@bp.route("/manager")
+
+@bp.route("/schedule")
+@flask_login.login_required
+@manager_only
+def schedule():
+    current_day = date.today().strftime('%Y-%m-%d')
+    movies = model.Projection.query.filter(model.Projection.day >= current_day).limit(10).all()
+    return render_template("manager_schedule.html", movies=movies)
+
+@bp.route("/edit/<int:id>")
+@flask_login.login_required
+@manager_only
+def edit(id):
+    projection = model.Projection.query.get(id)
+    movies = model.Movie.query.all()
+    return render_template("edit_projection.html", projection=projection, movies=movies)
+
+
+@bp.route("/edit/<int:id>", methods=["POST"])
+@flask_login.login_required
+@manager_only
+def edit_post(id):
+    projection = model.Projection.query.get(id)
+    movies = model.Movie.query.all()
+
+    movie_id = request.form.get("movie")
+    
+    projection.movie_id = movie_id
+    db.session.commit()
+
+    return render_template("edit_projection.html", projection=projection, movies=movies)
+
+
+@bp.route("/add", methods=["GET", "POST"])
+@flask_login.login_required
+@manager_only
+def add():
+    
+    return render_template("edit_projection.html")
+
+
+
+@bp.route("/reservations")
 @flask_login.login_required
 @manager_only
 def manager():
-    return render_template("manager.html")
+    return render_template("manager_schedule.html")
+

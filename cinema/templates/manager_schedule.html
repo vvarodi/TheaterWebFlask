@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section>
+    <h2>Future Projections</h2>
+
+    <form action= "{{ url_for('manager.add') }}">
+        <input type="submit" value="ADD A NEW PROJECTION" />
+    </form> 
+
+    {% if movies | length > 0 %}
+        
+        <table class="table-movies">
+            <thead>
+            <tr>
+                <th>Movie Title</th>
+                <th>Day</th>
+                <th>Cartel</th>
+                <th>Modify</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for movie in movies %}
+            <tr>
+                <td>{{ movie.movie.title }}</td>
+                <td>{{ movie.day }}</td>
+                <td><img src={{movie.movie.img}}  width=100></td>
+                <td>
+                    <form action="{{ url_for('manager.edit', id=movie.id) }}">
+                        <input type="submit" value="Edit" />
+                    </form> 
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            
+    {% else%}
+        <p>THERE ARE NO PROJECTIONS COMING SOON</p>
+    {% endif %}
+    </section>
+{% endblock %}
