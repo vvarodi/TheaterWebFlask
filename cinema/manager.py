@@ -44,11 +44,12 @@ def edit_post(id):
     movies = model.Movie.query.all()
 
     movie_id = request.form.get("movie")
-    
+    if movie_id == "none":
+        movie_id = projection.movie.id
     projection.movie_id = movie_id
     db.session.commit()
 
-    return render_template("edit_projection.html", projection=projection, movies=movies)
+    return redirect(url_for("manager.schedule"))
 
 
 @bp.route("/add", methods=["GET", "POST"])

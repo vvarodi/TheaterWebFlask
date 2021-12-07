@@ -23,11 +23,11 @@
             <tr>
                 
 
-                <td><label for="cars">Choose a movie:</label>
+                <td>
                     <select name="movie">
+                    <option value="none" selected disabled hidden>Change the movie</option>
                     {% for movie in movies %}
-                    <option value="{{movie.id}}">{{movie.title}}</option>
-                    
+                        <option value="{{movie.id}}">{{movie.title}}</option>
                     {% endfor %}
                     </select>
                 </td>

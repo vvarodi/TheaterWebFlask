@@ -1,51 +1,59 @@
 body {
-    background-color: rgb(202, 237, 248);
+    background-image: url(/static/background_blue_dark.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     position:relative;
+    min-height: 100vh;  /* footer always botton*/
+    padding-bottom: 5rem; 
+    margin: 0;
+    font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .header {
-    overflow: hidden;
-    background-color: rgb(10, 67, 95);
-    padding: 20px 10px;
+  overflow: hidden;
+  /* background-image: linear-gradient(rgb(87, 35, 246), rgb(182, 35, 246)); */
+  background-color:whitesmoke;
+  padding-block: 1em;
+  border-radius: 0 0 85% 85% / 30%;
+  text-align: center;
 
 }
-
+.header h1{
+  font-size: 25px;
+  color: rgb(8, 4, 21);
+}
 .header a {
-    float: left;
-    color: black;
-    text-align: center;
-    padding: 15px;
-    text-decoration: none;
-    font-size: 18px; 
-    line-height: 25px;
-    /* border-radius: 4px; */
-  }
-
-.header-title{
-    float: left;
-    font-size: 25px;
-    line-height: 25px;
+  color: black;
+  /* text-align: center; */
+  padding: 12px;
+  text-decoration: none; /* without link line*/
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 12px;  /* when mouse-over */
 }
-
-.header-right {
-    float: right;
-  }
-  
 /* Change the background color on mouse-over */
 .header a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: rgb(8, 4, 21);
+    color: white;
 }
 
 footer {
-    /* position:absolute; */
-    bottom:0;
-    width:100%;
-    height:60px;   /* Height of the footer */
-    background:rgb(10, 67, 95);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+    background: rgb(8, 4, 21);
  }
 
-
+h2 {
+  text-align: center;
+  color: rgb(8, 4, 21);
+}
 
 
 

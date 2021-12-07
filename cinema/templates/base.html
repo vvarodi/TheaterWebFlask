@@ -2,44 +2,40 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cinema</title>
+        <title>Theater</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
         <link rel="stylesheet"
               href="{{ url_for('static', filename='cinema.css') }}">
     </head>
     <body>
         <header class="header">
-            <h1 class="header-title">Cinema</h1>
-
-            {% if current_user.is_authenticated: %}
-                {% if current_user.role == current_user.role.__class__.manager %}
-                <div class="header-right">
-                    <a href="{{ url_for('main.index') }}">Home</a>
-                    <a href="{{ url_for('manager.manager') }}">Manager</a>
-                    <a href="{{ url_for('manager.schedule') }}">Schedule Showtimes</a>
-                    <a href="{{ url_for('auth.logout') }}">Log out</a>
-                </div>
-                {% endif %}
-                {% if current_user.role == current_user.role.__class__.customer %}
-                <div class="header-right">
-                    <a href="{{ url_for('main.index') }}">Home</a>
-                    <a href="{{ url_for('main.index') }}">Profile - {{current_user.name}} </a>
-                    <a href="{{ url_for('auth.logout') }}">Log out</a>
-                </div>
-                {% endif %}
-            {% else %}
-            
-            <div class="header-right">
-                <a href="{{ url_for('main.index') }}">Home</a>
-                <a href="{{ url_for('auth.signup') }}">Sign Up</a>
-                <a href="{{ url_for('auth.login') }}">Login</a>
+            <div>
+                <h1>Our Theater</h1>
+                    {% if current_user.is_authenticated: %}
+                        {% if current_user.role == current_user.role.__class__.manager %}
+                            <a href="{{ url_for('main.index') }}">Home</a>
+                            <a href="{{ url_for('manager.manager') }}">Manager</a>
+                            <a href="{{ url_for('manager.schedule') }}">Schedule Showtimes</a>
+                            <a href="{{ url_for('auth.logout') }}">Log out</a> 
+                        {% endif %}
+                        {% if current_user.role == current_user.role.__class__.customer %}
+                            <a href="{{ url_for('main.index') }}">Home</a>
+                            <a href="{{ url_for('main.index') }}">Profile - {{current_user.name}} </a>
+                            <a href="{{ url_for('auth.logout') }}">Log out</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{ url_for('main.index') }}">Home</a>
+                        <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+                        <a href="{{ url_for('auth.login') }}">Login</a>
+                    {% endif %}
+              
             </div>
-            {% endif %}
-
         </header>
 
         <section class="content">
             {% block content %}{% endblock %}
         </section>
+
         <footer><small>Developed for Web applications</small></footer>
     </body>
 </html>

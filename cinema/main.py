@@ -24,3 +24,8 @@ def index():
     
     return render_template("main/index.html", movies=all_movies, users=users, pmovies=pmovies, tmovies=tmovies)
 
+
+@bp.route("/movie/<int:id>")
+def movie(id):
+    movie = model.Movie.query.get(id)
+    return render_template("movie.html", movie=movie)
