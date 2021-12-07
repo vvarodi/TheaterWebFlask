@@ -31,7 +31,7 @@ class Movie(db.Model):
 class Screen(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
-    num_available_sits = db.Column(db.Integer, unique=False, nullable=False)
+    num_available_seats = db.Column(db.Integer, unique=False, nullable=False)
 
     projected = db.relationship('Projection', backref='screen', lazy=True)
 

@@ -15,7 +15,7 @@ bp = Blueprint("main", __name__)
 # MAIN VIEW OPEN FOR UNAUTHENTICATED USERS
 def index():
     current_day = date.today().strftime('%Y-%m-%d')
-    nmovies = model.Projection.query.filter(model.Projection.day > current_day).limit(10).all()  # limit(10) or without limit (maybe show all)
+    nmovies = model.Projection.query.filter(model.Projection.day > current_day).all()  # limit(10) or without limit (maybe show all)
     tmovies = model.Projection.query.filter(model.Projection.day == current_day).all()
 
     movies = model.Movie.query.all()
