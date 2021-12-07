@@ -1,0 +1,26 @@
+
+
+<table class="table-movies">
+    <thead>
+    <tr>
+        <th>Movie Poster</th>
+        <th>Title</th>
+        <th>Screen</th>
+        <th>Day</th>
+        <th>Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for projection in projections %}
+    <tr>
+        <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
+        <td>{{ projection.movie.title }}</td>
+        <td>{{ projection.screen.name }}</td>
+        <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
+        <td>{{ projection.time }}</td>
+        
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+

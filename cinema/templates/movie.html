@@ -1,2 +1,32 @@
+{% extends 'base.html' %}
 
-{{movie.title}}
+{% block content %}
+
+<section>   
+    <h2>&nbsp;&nbsp;{{movie.title}}&nbsp;&nbsp;</h2>
+    <section class="movie-description">
+         <div class="form" style="display: flex;width:100%;height: auto;">
+            <img src={{movie.img}} width=250px style="border-radius: 15px;">
+            <p style="padding-left: 25px;text-align: left;">
+                <b>Title:</b>&nbsp;{{movie.title}}<br><br>
+                <b>Synopsis:</b>&nbsp;{{movie.synopsis}}<br><br>
+                <b>Duration:</b>&nbsp;{{movie.duration}} min<br><br>
+                <b>Director:</b>&nbsp;{{movie.director}}<br><br>
+                <b>Main Cast:</b>&nbsp;{{movie.main_cast}}<br><br>
+            </p>
+        </div>
+    </section>
+    <section class="movie-projections">
+        <h2>&nbsp;&nbsp;Projections&nbsp;&nbsp;</h2>
+        {% if projections | length > 0 %}
+            {% include 'projections_table.html' %}
+        {% else%}
+            <p style="text-align: center">THERE ARE NO {{movie.title | upper}} PROJECTIONS SOON</p>
+        {% endif %}
+    </section>
+</section>
+    
+{% endblock %}
+
+
+<!-- {{movie.title}} -->
