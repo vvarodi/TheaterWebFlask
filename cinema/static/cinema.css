@@ -8,6 +8,7 @@ body {
     padding-bottom: 5rem; 
     margin: 0;
     font-family: Arial;
+
 }
 
 * {
@@ -16,17 +17,16 @@ body {
 
 .header {
   overflow: hidden;
-  /* background-image: linear-gradient(rgb(87, 35, 246), rgb(182, 35, 246)); */
   background-color:whitesmoke;
   padding-block: 1em;
   border-radius: 0 0 85% 85% / 30%;
   text-align: center;
-
 }
 .header h1{
   font-size: 25px;
   color: rgb(8, 4, 21);
 }
+
 .header a {
   color: black;
   /* text-align: center; */
@@ -53,32 +53,93 @@ footer {
 h2 {
   text-align: center;
   color: rgb(8, 4, 21);
+
+  display: flex;  /* ---- TEXT ----- */
+  flex-direction: row;
+}
+h2:before, h2:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 3px solid rgb(16, 8, 43);
+  margin: auto;
+}
+
+/* h1:before, h1:after{
+  content:'\00a\00a\00a0\00a0\00a0\00a0\00a';
+  text-decoration: line-through;
+  margin: auto 0.5em;
+} */
+
+
+.horizontal-movies {
+  margin: 0 auto;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  /* height: calc(180px + 1rem); */
+  padding: 1rem;
+  width: 100%;
+  overflow-y: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+}
+  
+.horizontal-movies > a {
+  scroll-snap-align: center;
+}
+
+.horizontal-movies img {
+  width: 180px;
+  max-width: none;
+  object-fit: contain;
+  border-radius: 1rem;
 }
 
 
+.form {
+  width: 400px;
+  height: 70vh;
+  margin: 10px auto ;
+  text-align: center; 
 
- .horizontal-movies {
-    margin: 0 auto;
-    display: grid;
-    grid-auto-flow: column;
-    gap: 1rem;
-    /* height: calc(180px + 1rem); */
-    padding: 1rem;
-    width: 100%;
-    overflow-y: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-  }
-  
-  .horizontal-movies > a {
-    scroll-snap-align: center;
-  }
-  
-  .horizontal-movies img {
-    width: 180px;
-    max-width: none;
-    object-fit: contain;
-    border-radius: 1rem;
-  }
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px 20px 20px;
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  border-radius: 15px; 
+  border: 2px solid rgb(39, 110, 190);   
+}  
+
+
+
+input[type=email], input[type=password],input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid rgb(8, 4, 21);
+  border-radius: 17px; 
+}
+input[type=radio] {
+  height: 16px;
+  width: 16px;
+}
+
+.submit{  
+  width: 100%;  
+  /* height: 30px;   */
+  padding: 12px 20px;
+  border: 2px solid whitesmoke;  
+  border-radius: 17px;  
+  margin: 20px auto;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: rgb(8, 4, 21);
+} 
+#popUp:hover {
+  background-color: rgba(183, 26, 94, 1);
+  border: 2px solid rgb(8, 4, 21);
+}
+
 
  

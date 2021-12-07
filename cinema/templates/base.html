@@ -4,31 +4,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Theater</title>
         <link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
-        <link rel="stylesheet"
-              href="{{ url_for('static', filename='cinema.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='cinema.css') }}">
     </head>
     <body>
         <header class="header">
             <div>
                 <h1>Our Theater</h1>
-                    {% if current_user.is_authenticated: %}
-                        {% if current_user.role == current_user.role.__class__.manager %}
-                            <a href="{{ url_for('main.index') }}">Home</a>
-                            <a href="{{ url_for('manager.manager') }}">Manager</a>
-                            <a href="{{ url_for('manager.schedule') }}">Schedule Showtimes</a>
-                            <a href="{{ url_for('auth.logout') }}">Log out</a> 
-                        {% endif %}
-                        {% if current_user.role == current_user.role.__class__.customer %}
-                            <a href="{{ url_for('main.index') }}">Home</a>
-                            <a href="{{ url_for('main.index') }}">Profile - {{current_user.name}} </a>
-                            <a href="{{ url_for('auth.logout') }}">Log out</a>
-                        {% endif %}
-                    {% else %}
+                {% if current_user.is_authenticated: %}
+                    {% if current_user.role == current_user.role.__class__.manager %}
                         <a href="{{ url_for('main.index') }}">Home</a>
-                        <a href="{{ url_for('auth.signup') }}">Sign Up</a>
-                        <a href="{{ url_for('auth.login') }}">Login</a>
+                        <a href="{{ url_for('manager.manager') }}">Manager</a>
+                        <a href="{{ url_for('manager.schedule') }}">Schedule Showtimes</a>
+                        <a href="{{ url_for('auth.logout') }}">Log out</a> 
                     {% endif %}
-              
+                    {% if current_user.role == current_user.role.__class__.customer %}
+                        <a href="{{ url_for('main.index') }}">Home</a>
+                        <a href="{{ url_for('main.index') }}">Profile - {{current_user.name}} </a>
+                        <a href="{{ url_for('auth.logout') }}">Log out</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ url_for('main.index') }}">Home</a>
+                    <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+                    <a href="{{ url_for('auth.login') }}">Login</a>
+                {% endif %}
             </div>
         </header>
 
@@ -37,5 +35,9 @@
         </section>
 
         <footer><small>Developed for Web applications</small></footer>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
+        <script type=text/javascript src="{{url_for('static', filename='js/main.js') }}"></script> -->
     </body>
+    
 </html>

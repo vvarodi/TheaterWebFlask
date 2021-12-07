@@ -20,14 +20,14 @@ def signup_post():
     role = request.form.get("role")
     # Check that passwords are equal
     if password != request.form.get("password_repeat"):
-        flash("Sorry, passwords are different")
+        flash("Sorry, passwords are different", 'error')
         return redirect(url_for("auth.signup"))
     # Check if the email is already at the database
     user = model.User.query.filter_by(email=email).first()
     
     # same email for both roles possible???
     if user:
-        flash("Sorry, the email you provided is already registered")
+        flash("Sorry, the email you provided is already registered", 'error')
         return redirect(url_for("auth.signup"))
  
     password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
@@ -49,7 +49,7 @@ def login_post():
     password = request.form.get("password")
     # Check that passwords are equal
     if password != request.form.get("password_repeat"):
-        flash("Sorry, passwords are different")
+        flash("Sorry, passwords are different", 'error')
         return redirect(url_for("auth.login"))
     # Get the user with that email from the database:
     user = model.User.query.filter_by(email=email).first()
@@ -61,10 +61,10 @@ def login_post():
     else:
         # Wrong email and/or password
         if user == None:
-            flash("User not registered. Go to Sign Up.")
+            flash("User not registered. Go to Sign Up.", 'error')
             return redirect(url_for("auth.login"))
         if user.email == email and bcrypt.check_password_hash(user.password, password) == 0:
-            flash("Wrong password")
+            flash("Wrong password", 'error')
         return redirect(url_for("auth.login"))
 
 @bp.route("/logout")

@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Login</h2>
-    <form action="{{ url_for('auth.login') }}" method="post">
-        <div><label>Email: <input type="email" name="email" required/></label></div>
-        <div><label>Password: <input type="password" name="password" required/></label></div>
-        <div><label>Repeat password: <input type="password" name="password_repeat" required/></label></div>
-        <div><input type="submit" value="Login"/></div>
-    </form>
+    <section class='form'>
+        <h2>&nbsp;&nbsp;Login&nbsp;&nbsp;</h2>
+      
+        {% include 'auth/error.html' %}
 
-    {% include 'auth/error.html' %}
+        <form action="{{ url_for('auth.login') }}" method="post">
+            <div><label>Email<br><input type="email" name="email" placeholder="Enter email..." required/></label></div>
+            <div><label><br>Password<br><input type="password" name="password" placeholder="Enter password..." required/></label></div>
+            <div><label><br>Repeat password<br><input type="password" name="password_repeat" placeholder="Enter password..." required/></label></div>
+            <div><input id="popUp" class='submit' type="submit" value="Login"/></div>
+        </form>
+
+    </section>
 
 {% endblock %}

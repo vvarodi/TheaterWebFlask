@@ -2,11 +2,11 @@
 
 {% block content %}
     <section>
-        <h2>Our Movies</h2>
+        <h2>&nbsp;&nbsp;Our Movies&nbsp;&nbsp;</h2>
         {% include 'movies_template.html' %}
     </section>
     <section>
-        <h2>Today Projections</h2>
+        <h2>&nbsp;&nbsp;Today Projections&nbsp;&nbsp;</h2>
         {% if tmovies | length > 0 %}
             {% set movies = tmovies %}
                 {% include 'movies_by_date.html' %}
@@ -16,7 +16,7 @@
         {% endif %}
     </section>
     <section>
-        <h2>Coming Soon</h2>
+        <h2>&nbsp;&nbsp;Coming Soon&nbsp;&nbsp;</h2>
         {% if pmovies | length > 0 %}
             {% set movies = pmovies %}
                 {% include 'movies_by_date.html' %}
