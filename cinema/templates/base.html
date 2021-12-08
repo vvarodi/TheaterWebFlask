@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Theater</title>
-        <link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='icon3.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='cinema.css') }}">
     </head>
     <body>
@@ -19,7 +19,8 @@
                     {% endif %}
                     {% if current_user.role == current_user.role.__class__.customer %}
                         <a href="{{ url_for('main.index') }}">Home</a>
-                        <a href="{{ url_for('main.index') }}">Profile - {{current_user.name}} </a>
+                        <a href="{{ url_for('main.user') }}">Profile</a>
+                        <a href="{{ url_for('main.reservation')}}">Buy Tickets </a>
                         <a href="{{ url_for('auth.logout') }}">Log out</a>
                     {% endif %}
                 {% else %}
@@ -35,9 +36,9 @@
         </section>
 
         <footer><small style="color:whitesmoke;"">Developed for Web applications</small></footer>
-
-        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
-        <script type=text/javascript src="{{url_for('static', filename='js/main.js') }}"></script> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script> --->
+        <script type=text/javascript src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type=text/javascript src="{{url_for('static', filename='js/main.js') }}"></script>
     </body>
     
 </html>

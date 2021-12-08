@@ -2,9 +2,9 @@
 
 {% block content %}
     <section>
-        <h2>Movie Projections</h2>
-        {% for d in data %}
-            <img src={{d.movie_id.img}}>
-        {% endfor %}
+        <h2>&nbsp;&nbsp;Welcome to Your Profile {{current_user.name}}&nbsp;&nbsp;</h2>
+        <h2>&nbsp;&nbsp;Your Favourite Movies&nbsp;&nbsp;</h2>
+        <h2>&nbsp;&nbsp;Current reservations&nbsp;&nbsp;</h2>
+        <h2>&nbsp;&nbsp;Past reservations&nbsp;&nbsp;</h2>
     </section>
 {% endblock %}

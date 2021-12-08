@@ -2,18 +2,46 @@
 
 {% block content %}
 
+{% if projection != None %}
 <section class='form'>
     <h2>&nbsp;&nbsp;Buy Ticket&nbsp;&nbsp;</h2>
-  
+    
     <form action="{{ url_for('main.reservation', id=projection.id) }}" method="post">
-        <div><img src={{projection.movie.img}}  width=100></div>
-        <div><label><br>Password<br><input type="password" name="password" placeholder="Enter password..." required/></label></div>
-        <div><label><br>Repeat password<br><input type="password" name="password_repeat" placeholder="Enter password..." required/></label></div>
+        
+        <div><img id="movie_image" src={{projection.movie.img}}  width=100></div>
+        <label><br>{{projection.movie.title}}<br></label>
+        <div><select id="projection" name="projection" onchange='interactiveForm();'>
+            {% for proj in projections %}
+                {% if proj.id == projection.id %}
+                <option value="{{proj.id}}" selected>Day:{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
+                {% else %}
+                <option value="{{proj.id}}">Day:{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
+                {% endif %}
+            {% endfor %}
+            </select>
+        </div>
+
+        <div id="results">
+            <h2>Results</h2>
+            <p>Compensated QT interval (Bazett formula) = <span id="qtc"></span> msec.
+            <br>
+            <p><span id="prolonged"></span></p>
+          </div>
+
+          
+
+        <div><label><br>Number of seats<br></label>
+            <select id="seats" name="seats">
+                <option value="{{projection.id}}">1</option>
+            </select>
+        </div>
+
         <div><input id="popUp" class='submit' type="submit" value="Buy"/></div>
+    
     </form>
 
 </section>
-
+{% endif %}
 
 <section class="movie-projections">
     <h2>&nbsp;&nbsp;See All Options&nbsp;&nbsp;</h2>
