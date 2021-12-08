@@ -21,6 +21,7 @@ body {
   padding-block: 1em;
   border-radius: 0 0 85% 85% / 30%;
   text-align: center;
+  
 }
 .header h1{
   font-size: 25px;
@@ -152,8 +153,27 @@ table {
   margin-right: auto;
   margin-left: auto;
   width: 100%;
+
 }
 table td, table th{
   text-align: center;
   border: 1px solid rgb(178, 255, 230);
+}
+
+
+.buttom {
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none; /* without link line*/
+  font-size: 12px; 
+  line-height: 25px;
+  border-radius: 12px; 
+  background-color: rgb(8, 4, 21);
+  border: 2px solid rgba(183, 26, 94, 1);
+}
+/* Change the background color on mouse-over */
+.buttom:hover {
+  background-color: rgba(183, 26, 94, 1);
+  border: 2px solid rgb(8, 4, 21);
 }

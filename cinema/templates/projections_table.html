@@ -9,6 +9,7 @@
         <th>Seats Left</th>
         <th>Day</th>
         <th>Time</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
         <td>{{ projection.screen.num_available_seats }}</td>
         <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
         <td>{{ projection.time }}</td>
+        <td><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>
         
     </tr>
     {% endfor %}

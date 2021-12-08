@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class='form'>
+    <h2>&nbsp;&nbsp;Buy Ticket&nbsp;&nbsp;</h2>
+  
+    <form action="{{ url_for('main.reservation', id=projection.id) }}" method="post">
+        <div><img src={{projection.movie.img}}  width=100></div>
+        <div><label><br>Password<br><input type="password" name="password" placeholder="Enter password..." required/></label></div>
+        <div><label><br>Repeat password<br><input type="password" name="password_repeat" placeholder="Enter password..." required/></label></div>
+        <div><input id="popUp" class='submit' type="submit" value="Buy"/></div>
+    </form>
+
+</section>
+
+
+<section class="movie-projections">
+    <h2>&nbsp;&nbsp;See All Options&nbsp;&nbsp;</h2>
+    {% if projections | length > 0 %}
+        {% include 'projections_table.html' %}
+    {% else%}
+        <p style="text-align: center">THERE ARE NO {{projection.movie.title | upper}} PROJECTIONS SOON</p>
+    {% endif %}
+</section>
+
+{% endblock %}

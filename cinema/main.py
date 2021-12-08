@@ -3,7 +3,7 @@ import dateutil.tz
 
 from flask import Blueprint, render_template
 from . import model
-import flask_login 
+import flask_login
 
 # current_user variable will also be available with the 
 # data of the currently authenticated user. 
@@ -30,3 +30,18 @@ def movie(id):
     movie = model.Movie.query.get(id)
     projections = model.Projection.query.filter(model.Projection.movie_id == id).all()
     return render_template("movie.html", movie=movie, projections=projections)
+
+
+
+@bp.route("/reservation/<int:id>")
+@flask_login.login_required
+def reservation(id):
+    projection = model.Projection.query.get(id)
+    projections = model.Projection.query.filter(model.Projection.id == id).all()
+    return render_template("reservation.html", projection=projection, projections=projections)
+
+
+@bp.route("/reservation/<int:id>", methods=["POST"])
+@flask_login.login_required
+def reservation_post(id):
+    return render_template("reservation.html")
