@@ -137,6 +137,7 @@ select {
   padding: 0.65em 2.5em 0.55em 0.75em;
   background-color: palevioletred;
   cursor: pointer;
+  /* text-align: center; */
 }
 /* select:hover {
   border-radius: 17px;
@@ -162,7 +163,7 @@ select:active {
   color: whitesmoke;
   background-color: rgb(8, 4, 21);
 } 
-#popUp:hover {
+.submit:hover {
   background-color: rgba(183, 26, 94, 1);
   border: 2px solid rgb(8, 4, 21);
 }
@@ -201,3 +202,14 @@ table td, table th{
   background-color: rgba(183, 26, 94, 1);
   border: 2px solid rgb(8, 4, 21);
 }
+
+#price{
+  color:rgb(8, 4, 21);
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 2px solid rgb(39, 110, 190);
+  border-radius: 17px;
+  /* background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); */
+}
+

@@ -55,11 +55,16 @@ def reservation(id):
 @bp.route("/reservation/<int:id>", methods=["POST"])
 @flask_login.login_required
 def reservation_post(id):
-
+    choosen_projection = request.form.get("projection")
+    choosen_num_seats = request.form.get("seats")
+    
+    
 
     return render_template("reservation.html")
 
 
+
+# move latter to manager private 
 @bp.route('/ajax', methods=['POST', 'GET'])
 def process_ajax():
     if request.method == "POST":

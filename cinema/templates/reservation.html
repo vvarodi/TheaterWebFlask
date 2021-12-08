@@ -8,7 +8,7 @@
     
     <form action="{{ url_for('main.reservation', id=projection.id) }}" method="post">
         
-        <div><img id="movie_image" src={{projection.movie.img}}  width=100></div>
+        <div><img id="movie_image" src={{projection.movie.img}}  width=100 style="border-radius: 15px;"></div>
         <label><br>{{projection.movie.title}}<br></label>
         <div><select id="projection" name="projection" onchange='interactiveForm();'>
             {% for proj in projections %}
@@ -23,12 +23,13 @@
 
 
         <div><label><br>Number of seats<br></label>
-            <select id="seats" name="seats">
-                <!-- <option value="1">1</option> -->
+            <select id="seats" name="seats" onchange='Price();'>
+                <option value="1" selected>1</option>
             </select>
         </div>
-        <div><label id="price">     </label></div>
-        <div><input id="popUp" class='submit' type="submit" value="Buy"/></div>
+        <br>
+        <div><a id="price"></a></div>
+        <div><input class='submit' type="submit" value="Buy"/></div>
     
     </form>
 

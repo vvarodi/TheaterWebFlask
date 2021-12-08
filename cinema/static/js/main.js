@@ -1,11 +1,11 @@
 
 
 // CLIENT SIDE
+
+
 var interactiveForm = function(){
     var CProj = $('#projection option:selected').val();
-    // $('#movie') = 
-    console.log(CProj);
-
+    var numSeats = $('#seats option:selected').val();
     $.ajax({
         type: "POST",
         url: "/ajax",
@@ -13,14 +13,16 @@ var interactiveForm = function(){
         dataType: 'json',
         success: function(result) {
             console.log(result.result[CProj]);
+            $("#seats").find('option').not(':first').remove();
             for (var i = 1; i <= result.result[CProj]; i++) {
-                // if ()
                 var stri = i.toString();
-                $("#seats").append($('<option>', {value:stri, text:stri}));
+                if (i != 1){
+                    $("#seats").append($('<option>', {value:stri, text:stri}));
+                }
             }
-
-            var price = 5;
-            var strprice = '<br>Price: '+ price.toString() + '€';
+            var price = 5;  // think if use price as attribute or fixed
+            var totalPrice = price * numSeats;
+            var strprice = 'Price:&nbsp;&nbsp;('+ price.toString()+ 'x'+ numSeats +') = '+totalPrice.toString() + '€';
             $("#price").empty();
             $("#price").append(strprice);
         },
@@ -29,10 +31,21 @@ var interactiveForm = function(){
         },
     });
 
-}   
+}  
+
+var Price = function(){
+    var CProj = $('#projection option:selected').val();
+    var numSeats = $('#seats option:selected').val();
+    var price = 5;  // think if use price as attribute or fixed
+    var totalPrice = price * numSeats;
+    var strprice = 'Price:&nbsp;&nbsp;('+ price.toString()+ 'x'+ numSeats +') = '+totalPrice.toString() + '€';
+    $("#price").empty();
+    $("#price").append(strprice);
+}  
 
 
 $(function(){
     interactiveForm();
+    Price();
 }
 )
