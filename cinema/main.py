@@ -2,6 +2,7 @@ from datetime import date
 import dateutil.tz
 
 from flask import Blueprint, render_template, request
+from flask.json import jsonify
 from . import model
 import flask_login
 
@@ -59,21 +60,12 @@ def reservation_post(id):
     return render_template("reservation.html")
 
 
-
-
-
-
-
-
-# @bp.route('/view')
-# def show_view():
-#     datos = model.Projection.query.all()
-#     return render_template("view.html", datos=datos)
-
-# @bp.route('/ajax', methods=["GET", "POST"])             
-# def ajax():
-#     if request.method == "POST":
-#         search = request.form.get("projection")
-
-#         projection = model.Projection.query.get(int(search))
-#         return render_template("view.html", projection=projection)
+@bp.route('/ajax', methods=['POST', 'GET'])
+def process_ajax():
+    if request.method == "POST":
+        projections = model.Projection.query.all()
+        results = {}
+        for proj in projections:
+            results[proj.id] = proj.screen.num_available_seats
+        result = results
+    return jsonify(result=result)

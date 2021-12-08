@@ -1,3 +1,4 @@
+from flask import json
 from . import db
 import flask_login
 import enum
@@ -36,6 +37,7 @@ class Screen(db.Model):
     projected = db.relationship('Projection', backref='screen', lazy=True)
 
 class Projection(db.Model):
+    __tablename__ = 'projection'
     id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.Date(), unique=False, nullable=False)
     time = db.Column(db.Time(), unique=False, nullable=False)
