@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% include 'auth/error.html' %}
     <section>
         <h2>&nbsp;&nbsp;Welcome to Your Profile {{current_user.name}}&nbsp;&nbsp;</h2>
         <h2>&nbsp;&nbsp;Your Favourite Movies&nbsp;&nbsp;</h2>

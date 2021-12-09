@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# Linux
 # python3 -m venv virtual
 # . virtual/bin/activate
 
+# Windows
 py -3 -m venv virtual
 virtual\\Scripts\\activate
 

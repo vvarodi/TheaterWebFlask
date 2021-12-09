@@ -1,11 +1,11 @@
 # Only view for manager user
-from functools import wraps
 from flask import request, redirect, url_for, render_template, Blueprint
 from flask_login import current_user
 import flask_login
 from . import model
 from datetime import date
 from . import db 
+from functools import wraps
 
 bp = Blueprint("manager", __name__)
 
@@ -17,7 +17,6 @@ def manager_only(f):
         if current_user.role == model.UserRole.manager:
             return f(*args, **kwargs)
     return decorated_function
-
 
 @bp.route("/schedule")
 @flask_login.login_required
