@@ -33,6 +33,7 @@ def movie(id):
     current_day = date.today().strftime('%Y-%m-%d')
     movie = model.Movie.query.get(id)
     projections = model.Projection.query.filter(model.Projection.movie_id == id).all()
+    seats = 
     return render_template("movie.html", movie=movie, projections=projections)
 
 
@@ -78,23 +79,25 @@ def reservation_post():
 from sqlalchemy import func
 def compute_reserved_seats(id):
     projection = model.Projection.query.filter(model.Projection.id == id).one()
-    # sum_result = db.session.query(
-    #     db.func.sum(model.Reservation.num_seats).label('reserved')
-    # ).filter(
-    #     model.Reservation.projection == projection
-    # ).one()
-    # num_reserved_seats = sum_result.reserved
-    # num_free_seats = projection.screen.num_total_seats - num_reserved_seats
-
-    q = db.session.query(model.Reservation.projection_id, func.sum(model.Reservation.num_seats)).group_by(model.Reservation.projection_id).all()
-    for lst in q:
-        num_reserved_seats = lst[1]
-        if lst[0] == id:
-            num_free_seats = projection.screen.num_total_seats - num_reserved_seats
-            return  num_free_seats
+    sum_result = db.session.query(
+        db.func.sum(model.Reservation.num_seats).label('reserved')
+    ).filter(
+        model.Reservation.projection == projection
+    ).one()
+    num_reserved_seats = sum_result.reserved
+    if (sum_result.reserved != None):
+        num_free_seats = projection.screen.num_total_seats - num_reserved_seats
+    else:
+        num_free_seats = projection.screen.num_total_seats 
+    # q = db.session.query(model.Reservation.projection_id, func.sum(model.Reservation.num_seats)).group_by(model.Reservation.projection_id).all()
+    # for lst in q:
+    #     num_reserved_seats = lst[1]
+    #     if lst[0] == id:
+    #         num_free_seats = projection.screen.num_total_seats - num_reserved_seats
+    #         return  num_free_seats
        
             
-    return  projection.screen.num_total_seats
+    return  num_free_seats
 
 @bp.route('/ajax', methods=['POST', 'GET'])
 def process_ajax():

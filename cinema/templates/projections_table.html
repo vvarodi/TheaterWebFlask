@@ -18,7 +18,7 @@
         <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
         <td>{{ projection.movie.title }}</td>
         <td>{{ projection.screen.name }}</td>
-        <td>{{ projection.screen.num_total_seats }}</td>
+        <td>{{ seats }}</td>
         <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
         <td>{{ projection.time }}</td>
         <td><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>

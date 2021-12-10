@@ -20,7 +20,7 @@
             {% endfor %}
             </select>
         </div>
-        
+        {% if seats > 0 %}
             <div id="more-seats">
                 <div><label><br>Number of seats<br></label>
                     <select id="seats" name="seats" onchange='Price();'>
@@ -32,7 +32,7 @@
                 <div><a id="price"></a></div>
                 <div><input class='submit' type="submit" value="Buy"/></div>
             </div>
-      
+        {% endif %}    
             <div id="no-more-seats">
                 <p>NO MORE AVAILABLE SEATS. CHECK ALL OPTIONS.</p>
             </div>
