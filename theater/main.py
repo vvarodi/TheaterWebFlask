@@ -33,7 +33,7 @@ def movie(id):
     current_day = date.today().strftime('%Y-%m-%d')
     movie = model.Movie.query.get(id)
     projections = model.Projection.query.filter(model.Projection.movie_id == id).all()
-    seats = 
+
     return render_template("movie.html", movie=movie, projections=projections)
 
 
