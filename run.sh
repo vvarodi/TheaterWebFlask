@@ -8,4 +8,4 @@
 virtual\\Scripts\\activate
 export FLASK_APP=theater
 export FLASK_ENV=development
-flask run
+python -m flask run

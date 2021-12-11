@@ -23,8 +23,8 @@ def manager_only(f):
 @manager_only
 def schedule():
     current_day = date.today().strftime('%Y-%m-%d')
-    movies = model.Projection.query.filter(model.Projection.day >= current_day).limit(10).all()
-    return render_template("manager_schedule.html", movies=movies)
+    projections = model.Projection.query.filter(model.Projection.day >= current_day).all()
+    return render_template("manager_schedule.html", projections=projections)
 
 @bp.route("/edit/<int:id>")
 @flask_login.login_required
@@ -50,6 +50,9 @@ def edit_post(id):
 
     return redirect(url_for("manager.schedule"))
 
+
+
+#### delete latter
 
 @bp.route("/add", methods=["GET", "POST"])
 @flask_login.login_required

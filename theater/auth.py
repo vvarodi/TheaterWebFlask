@@ -66,7 +66,7 @@ def login_post():
     if user and bcrypt.check_password_hash(user.password, password):
         # The user exists and the password is correct
         flask_login.login_user(user)
-        flash("You've successfully loged!", 'success')
+        flash("You have successfully loged!", 'success')
         return redirect(url_for("main.index"))
     else:
         # Wrong email and/or password

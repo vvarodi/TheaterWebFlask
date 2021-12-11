@@ -1,6 +1,6 @@
 from flask import json
 
-from cinema.main import reservation
+
 from . import db
 import flask_login
 import enum
@@ -52,9 +52,7 @@ class Projection(db.Model):
     movie_booked = db.relationship('Reservation', backref='projection', lazy=True)
 
     # def num_free_seats(self, id):
-    #     num = 0
-    #     reservations = db.session.query(model.Reservation, model.P)
-    #     return num
+    #    
 
 class Reservation(db.Model):
     __tablename__ = "reservation"

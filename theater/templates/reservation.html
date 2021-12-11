@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% include 'auth/error.html' %}
 
 {% if projection != None %}
 <section class='form'>
     <h2>&nbsp;&nbsp;Buy Ticket&nbsp;&nbsp;</h2>
-    
     <form action="{{ url_for('main.reservation_post') }}" method="post">
         
         <div><img id="movie_image" src={{projection.movie.img}}  width=100 style="border-radius: 15px;"></div>

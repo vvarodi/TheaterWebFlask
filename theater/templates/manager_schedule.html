@@ -2,41 +2,42 @@
 
 {% block content %}
     <section>
-    <h2>Future Projections</h2>
+        <h2>Future Projections</h2>
 
-    <form action= "{{ url_for('manager.add') }}">
-        <input type="submit" value="ADD A NEW PROJECTION" />
-    </form> 
-
-    {% if movies | length > 0 %}
-        
-        <table class="table-movies">
-            <thead>
-            <tr>
-                <th>Movie Title</th>
-                <th>Day</th>
-                <th>Cartel</th>
-                <th>Modify</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for movie in movies %}
-            <tr>
-                <td>{{ movie.movie.title }}</td>
-                <td>{{ movie.day }}</td>
-                <td><img src={{movie.movie.img}}  width=100></td>
-                <td>
-                    <form action="{{ url_for('manager.edit', id=movie.id) }}">
-                        <input type="submit" value="Edit" />
-                    </form> 
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <a class="buttom" href="{{ url_for('manager.add')}}" style="display:block;">ADD A NEW PROJECTION</a>
+        <br>
+        {% if projections | length > 0 %}
             
-    {% else%}
-        <p>THERE ARE NO PROJECTIONS COMING SOON</p>
-    {% endif %}
+            <table class="table-slidedown">
+                <thead>
+                <tr>
+                    <th>Movie Poster</th>
+                    <th>Title</th>
+                    <th>Screen</th>
+                    <th>Seats Left</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for projection in projections %}
+                <tr>
+                    <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
+                    <td>{{ projection.movie.title }}</td>
+                    <td>{{ projection.screen.name }}</td>
+                    <td>{{ projection.screen.num_total_seats }}</td>  // change here
+                    <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
+                    <td>{{ projection.time }}</td>
+                    <td><a class="buttom" href="{{ url_for('manager.edit', id=projection.id) }}">Edit</a></td>
+                    
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+                
+        {% else%}
+            <p style="text-align: center">THERE ARE NO SCHEDULED PROJECTIONS</p>
+        {% endif %}
     </section>
 {% endblock %}

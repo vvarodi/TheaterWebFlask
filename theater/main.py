@@ -1,8 +1,9 @@
 from datetime import date, datetime
 import dateutil.tz
 
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, url_for
 from flask.json import jsonify
+from werkzeug.utils import redirect
 from . import model
 from . import db
 import flask_login
@@ -30,8 +31,8 @@ def index():
 # MOVIE VIEW OPEN FOR UNAUTHENTICATED USERS
 @bp.route("/movie/<int:id>")
 def movie(id):
-    current_day = date.today().strftime('%Y-%m-%d')
     movie = model.Movie.query.get(id)
+
     projections = model.Projection.query.filter(model.Projection.movie_id == id).all()
 
     return render_template("movie.html", movie=movie, projections=projections)
@@ -40,7 +41,11 @@ def movie(id):
 @bp.route("/user")
 @flask_login.login_required
 def user():
-    return render_template('user.html')
+    current_day = date.today()
+    cuurent_time = datetime.now()
+    reservations = model.Reservation.query.filter(model.Reservation.user_id == current_user.id).all()
+
+    return render_template('user.html', reservations = reservations)
 
 
 @bp.route("/reservation/", defaults={'id': None})
@@ -73,7 +78,9 @@ def reservation_post():
     db.session.add(new_reservation)
     db.session.commit()
     flash("You have bought %s tickets for %s"%(choosen_num_seats, projection.movie.title), 'success')
-    return render_template("user.html")
+    
+    # reservations = model.Reservation.query.filter(model.Reservation.user_id == current_user.id).all()
+    return redirect(url_for("main.reservation"))
 
 
 from sqlalchemy import func
@@ -110,5 +117,4 @@ def process_ajax():
             results[proj.id] = compute_reserved_seats(proj.id)
         result = results
     return jsonify(result=result)
-
 
