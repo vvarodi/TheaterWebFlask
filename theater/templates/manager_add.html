@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if projection != None %}
+<section class='form'>
+    <h2>&nbsp;&nbsp;ADD A NEW PROJECTION&nbsp;&nbsp;</h2>
+    <form action="{{ url_for('manager.add_post') }}" method="post">
+        
+ 
+        <div>
+            <label>Movie: <br></label>
+            <select name="movie" required>
+            {% for movie in movies %}
+                <option value="{{movie.id}}">{{movie.title}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label><br>Screen: <br></label>
+            <select name="screen" required>
+            {% for screen in screens %}
+                <option value="{{screen.id}}">{{screen.name}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label><br>Date:<br></label>
+            <input type="date" name="day" value="{{current_day}}" min="2021-01-01" max="2022-12-31" required>
+        </div>
+        <div>
+            <label><br>Time:<br></label>
+            <input type="time" name="time" value="00:00:00" required>
+        </div>
+        
+        <div><input class='submit' type="submit" value="Add"/></div>
+     
+      
+    </form>
+
+</section>
+{% endif %}
+
+
+{% endblock %}

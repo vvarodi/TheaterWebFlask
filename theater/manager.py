@@ -6,6 +6,7 @@ from . import model
 from datetime import date
 from . import db 
 from functools import wraps
+from datetime import datetime
 
 bp = Blueprint("manager", __name__)
 
@@ -54,18 +55,39 @@ def edit_post(id):
 
 #### delete latter
 
-@bp.route("/add", methods=["GET", "POST"])
+
+
+
+@bp.route("/add")
 @flask_login.login_required
 @manager_only
 def add():
-    
-    return render_template("edit_projection.html")
+    movies = model.Movie.query.all()
+    screens = model.Screen.query.all()
+    current_day = date.today().strftime('%Y-%m-%d')
+    return render_template("manager_add.html", movies=movies, screens=screens, current_day=current_day)
+
+@bp.route("/add", methods=["POST"])
+@flask_login.login_required
+@manager_only
+def add_post():
+    movie = request.form.get("movie")
+    screen = request.form.get("screen")
+    day = request.form.get("day")
+    time = request.form.get("time")
+    day = datetime.strptime(day, "%Y-%m-%d").date()
+    time = datetime.strptime(time, "%H:%M:%S").time()
+    new_projection = model.Projection(day=day, time=time, movie_id=movie, screen_id=screen)
+    db.session.add(new_projection)
+    db.session.commit()
+    return render_template("manager_schedule.html")
+
+
 
 
 
 @bp.route("/reservations")
 @flask_login.login_required
 @manager_only
-def manager():
-    return render_template("manager_schedule.html")
-
+def reservations():
+    return render_template("manager_reservations.html")
