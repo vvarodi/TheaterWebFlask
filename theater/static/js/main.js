@@ -39,8 +39,6 @@ var interactiveForm = function(){
                 $("#more-seats").hide();
                 
             }
-            
-            
         },
         error: function(error){
             console.log(error);

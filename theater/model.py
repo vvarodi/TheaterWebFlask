@@ -50,9 +50,7 @@ class Projection(db.Model):
     screen_id = db.Column(db.Integer, db.ForeignKey('screen.id'))
 
     movie_booked = db.relationship('Reservation', backref='projection', lazy=True)
-
-    # def num_free_seats(self, id):
-    #    
+  
 
 class Reservation(db.Model):
     __tablename__ = "reservation"

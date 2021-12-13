@@ -75,6 +75,7 @@ def add_post():
     screen = request.form.get("screen")
     day = request.form.get("day")
     time = request.form.get("time")
+    time = time + ':00'
     day = datetime.strptime(day, "%Y-%m-%d").date()
     time = datetime.strptime(time, "%H:%M:%S").time()
     new_projection = model.Projection(day=day, time=time, movie_id=movie, screen_id=screen)
@@ -90,4 +91,5 @@ def add_post():
 @flask_login.login_required
 @manager_only
 def reservations():
-    return render_template("manager_reservations.html")
+    reservations = model.Reservation.query.all()
+    return render_template("manager_reservations.html", reservations=reservations)

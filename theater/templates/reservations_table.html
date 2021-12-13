@@ -1,0 +1,31 @@
+
+
+
+<table class="table-movies">
+    <thead>
+    <tr>
+        <th>Movie Poster</th>
+        <th>Title</th>
+        <th>Screen</th>
+        <th>Seats Reserved</th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Booked Day</th>
+      
+    </tr>
+    </thead>
+    <tbody>
+    {% for reservation in reservations %}
+    <tr>
+        <td><a href="{{ url_for('main.movie', id=reservation.projection.movie.id) }}"><img src={{reservation.projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
+        <td>{{ reservation.projection.movie.title }}</td>
+        <td>{{ reservation.projection.screen.name }}</td>
+        <td>{{ reservation.projection.screen.num_total_seats }}</td>  // change here
+        <td>{{ reservation.projection.day.strftime('%d-%m-%Y') }}</td>
+        <td>{{ reservation.projection.date_time }}</td>
+        <td></td>
+        
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
