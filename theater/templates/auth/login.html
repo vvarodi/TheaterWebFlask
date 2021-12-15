@@ -10,7 +10,8 @@
             <div><label>Email<br><input type="email" name="email" placeholder="Enter email..." required/></label></div>
             <div><label><br>Password<br><input type="password" name="password" placeholder="Enter password..." required/></label></div>
             <div><label><br>Repeat password<br><input type="password" name="password_repeat" placeholder="Enter password..." required/></label></div>
-            <div><input id="popUp" class='submit' type="submit" value="Login"/></div>
+            <div><input class='submit' type="submit" value="Login"/></div>
+            <div>You don't have an account? <a href="{{ url_for('auth.signup') }}" style="color:rgb(185, 31, 108)">Sign Up</a></div>
         </form>
 
     </section>

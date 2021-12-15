@@ -2,7 +2,6 @@
 
 {% block content %}
 {% include 'auth/error.html' %}
-
 {% if projection != None %}
 <section class='form'>
     <h2>&nbsp;&nbsp;Buy Ticket&nbsp;&nbsp;</h2>
@@ -13,30 +12,30 @@
         <div><select id="projection" name="projection" onchange='interactiveForm();'>
             {% for proj in projections %}
                 {% if proj.id == projection.id %}
-                <option value="{{proj.id}}" selected>Day:{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
+                <option value="{{proj.id}}" selected><b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
                 {% else %}
-                <option value="{{proj.id}}">Day:{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
+                <option value="{{proj.id}}"><b></b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
                 {% endif %}
             {% endfor %}
             </select>
         </div>
-        {% if seats > 0 %}
-            <div id="more-seats">
-                <div><label><br>Number of seats<br></label>
-                    <select id="seats" name="seats" onchange='Price();'>
-                        <option id="option-seats" value="1" selected>1</option>
-                    </select>
-                </div>
-                <br>
-            
-                <div><a id="price"></a></div>
-                <div><input class='submit' type="submit" value="Buy"/></div>
+        
+        <div id="more-seats">
+            <div><label><br>Number of seats<br></label>
+                <select id="seats" name="seats" onchange='Price();'>
+                    <option id="option-seats" value="1" selected>1</option>
+                </select>
             </div>
-        {% endif %}    
-            <div id="no-more-seats">
-                <p>NO MORE AVAILABLE SEATS. CHECK ALL OPTIONS.</p>
-            </div>
-      
+            <br>
+        
+            <div><a id="price"></a></div>
+            <div><input class='submit' type="submit" value="Buy"/></div>
+        </div>
+    
+        <div id="no-more-seats">
+            <p>NO MORE AVAILABLE SEATS. CHECK ALL OPTIONS.</p>
+        </div>
+        
     </form>
 
 </section>

@@ -187,6 +187,8 @@ table td, table th{
 
 
 .buttom {
+  overflow: hidden;
+  white-space: nowrap;  /*avoids the bad resizing when window smaller*/
   color: white;
   text-align: center;
   padding: 12px;

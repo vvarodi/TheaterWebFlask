@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    {% include 'auth/error.html' %}
     <section>
         <h2>&nbsp;&nbsp;Our Movies&nbsp;&nbsp;</h2>
         {% include 'movies_horizontal.html' %}
@@ -11,9 +11,8 @@
         {% if today_projections | length > 0 %}
             {% set projections = today_projections %}
                 {% include 'projections_table.html' %}
-          
         {% else%}
-            <p style="text-align: center">THERE ARE NO PROJECTIONS TODAY</p>
+            <p style="text-align: center">THERE ARE NO PROJECTIONS FOR TODAY</p>
         {% endif %}
     </section>
     <section>
@@ -21,7 +20,6 @@
         {% if next_projections | length > 0 %}
             {% set projections = next_projections %}
                 {% include 'projections_table.html' %}
-            
         {% else%}
             <p style="text-align: center">THERE ARE NO PROJECTIONS COMING SOON</p>
         {% endif %}

@@ -1,5 +1,4 @@
 
-
 <table class="table-movies">
     <thead>
     <tr>
@@ -13,18 +12,21 @@
     </tr>
     </thead>
     <tbody>
-    {% for projection in projections %}
-    <tr>
-        <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
-        <td>{{ projection.movie.title }}</td>
-        <td>{{ projection.screen.name }}</td>
-        <td>{{ projection.screen.num_total_seats }}</td>  // change here
-        <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
-        <td>{{ projection.time }}</td>
-        <td><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>
-        
-    </tr>
-    {% endfor %}
+        {% for projection in projections %}
+
+        {% set proj = "proj"  ~ projection.id  %}
+
+        <tr id="{{proj}}">
+            <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
+            <td>{{ projection.movie.title }}</td>
+            <td>{{ projection.screen.name }}</td>
+            <td class="seats"></td>
+            <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
+            <td>{{ projection.time }}</td>
+            <td><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>
+            
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
 
