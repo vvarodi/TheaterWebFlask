@@ -32,22 +32,30 @@ def schedule():
 @flask_login.login_required
 @manager_only
 def edit(id):
-    projection = model.Projection.query.get(id)
     movies = model.Movie.query.all()
-    return render_template("edit_projection.html", projection=projection, movies=movies)
+    screens = model.Screen.query.all()
+    current_day = date.today().strftime('%Y-%m-%d')
+    return render_template("manager_add.html", movies=movies, screens=screens, current_day=current_day)
 
 
 @bp.route("/edit/<int:id>", methods=["POST"])
 @flask_login.login_required
 @manager_only
 def edit_post(id):
-    projection = model.Projection.query.get(id)
-    movies = model.Movie.query.all()
+    movie = request.form.get("movie")
+    screen = request.form.get("screen")
+    day = request.form.get("day")
+    time = request.form.get("time")
+    time = time + ':00'
+    day = datetime.strptime(day, "%Y-%m-%d").date()
+    time = datetime.strptime(time, "%H:%M:%S").time()
 
-    movie_id = request.form.get("movie")
-    if movie_id == "none":
-        movie_id = projection.movie.id
-    projection.movie_id = movie_id
+    projection = model.Projection.query.filter_by(model.Projection.id == id).first()
+    projection.day = day
+    projection.time = time
+    projection.movie_id = movie
+    projection.screen_id = screen 
+
     db.session.commit()
 
     return redirect(url_for("manager.schedule"))
@@ -143,8 +151,8 @@ def process_ajax():
         results = {}
         for proj in projections:
             seats = compute_reserved_seats(proj.id)
-            # results[proj.id] = proj.screen.num_total_seats
-            results[proj.id] = {'left':seats,'available': proj.screen.num_total_seats - seats}
+            # results[proj.id] = {'left':seats,'available': proj.screen.num_total_seats - seats}
+            results[proj.id] = seats
         result = results
     return jsonify(result=result)
 

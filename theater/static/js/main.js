@@ -1,8 +1,5 @@
 
-
-// CLIENT SIDE
-
-
+// client side
 var interactiveForm = function(callback = null){
     var CProj = $('#projection option:selected').val();
     var numSeats = $('#seats option:selected').val();

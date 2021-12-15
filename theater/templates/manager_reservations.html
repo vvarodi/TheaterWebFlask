@@ -10,7 +10,7 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Movie Poster</th>
+                    <th>Projection Id</th>
                     <th>Title</th>
                     <th>Screen</th>
                     <th>Total Seats</th>
@@ -27,7 +27,7 @@
                     {% set proj = "proj"  ~ projection.id  %}
             
                     <tr id="{{proj}}">
-                        <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
+                        <td>{{projection.id}}</td>
                         <td>{{ projection.movie.title }}</td>
                         <td>{{ projection.screen.name }}</td>
                         <td>{{ projection.screen.num_total_seats }}</td>
