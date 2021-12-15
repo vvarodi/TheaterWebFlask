@@ -1,9 +1,5 @@
 
 
--- insert into user values
--- (1,"mary@example.com", "Mary", "pwd"),
--- (2,"ana@example.com", "Ana", "pwd");
-
 insert into movie VALUES
 (1, "Matrix", "Lana Wachowski", 136, "Keanu Reeves, Christina Ricci, Carrie-Anne Moss","When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth: the life he knows is the elaborate deception of an evil cyber-intelligence.","https://cdn.shopify.com/s/files/1/0057/3728/3618/products/ed4796ac6feff9d2a6115406f964c928_6b200bda-fe71-4900-ad7f-903cdda50dab_480x.progressive.jpg?v=1573587596"),
 (2, "Pulp Fiction", "Quentin Tarantino", 154, "John Travolta, Uma Thurman, Samuel L. Jackson","The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.", "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/950e439404c3d5eddd86ae876cec83bf_949b5045-2503-4883-bcd2-ff1f31f5b14c_480x.progressive.jpg?v=1573588746"),
@@ -27,6 +23,4 @@ insert into projection VALUES
 (666, '2021-12-17', '13:50:00',6, 3),
 (777, '2021-12-18', '20:45:00',6, 1),
 (888, '2021-12-20', '12:00:00',1, 3);
-
-
 
