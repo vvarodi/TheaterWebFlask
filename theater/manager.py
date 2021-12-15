@@ -24,19 +24,8 @@ def manager_only(f):
 @flask_login.login_required
 @manager_only
 def schedule():
-    current_day = date.today()
-    # Show one week future projections (by timedelta(days=3), timedelta(weeks=1))
-    future = current_day + timedelta(weeks=1)  # or (days=7)
-    past = current_day - timedelta(weeks=1)
-    # MANAGER WILL SEE ONE WEEK BEFORE AND ONE WEEK LATTER FROM TODAY
-    projections = model.Projection.query.filter(model.Projection.day <= future, model.Projection.day >= past).order_by(model.Projection.day.asc(), model.Projection.time.asc()).all()
     
-    num_results = []
-    for proj in projections:
-        # results[proj.id] = proj.screen.num_total_seats
-        num_results.append(proj.screen.num_total_seats - compute_reserved_seats(proj.id))
-    
-
+    projections, num_results = manager_reservations_auxiliar()
     return render_template("manager_schedule.html", packed=zip(projections, num_results), projections=projections)
 
 @bp.route("/edit/<int:id>")
@@ -95,14 +84,8 @@ def add_post():
 @flask_login.login_required
 @manager_only
 def reservations():
-    current_day = date.today()
-    # Show one week future projections (by timedelta(days=3), timedelta(weeks=1))
-    future = current_day + timedelta(weeks=1)  # or (days=7)
-    past = current_day - timedelta(weeks=1)
-    # MANAGER WILL SEE ONE WEEK BEFORE AND ONE WEEK LATTER FROM TODAY
-    projections = model.Projection.query.filter(model.Projection.day <= future, model.Projection.day >= past).order_by(model.Projection.day.asc(), model.Projection.time.asc()).all()
-    # reservations = model.Reservation.query.all()
-    return render_template("manager_reservations.html", projections=projections)
+    projections, num_results = manager_reservations_auxiliar()
+    return render_template("manager_reservations.html", packed=zip(projections, num_results), projections=projections)
 
 
 @bp.route("/manager_reservation/<int:id>")
@@ -113,6 +96,17 @@ def manager_reservation(id):
     return render_template("manager_reservation.html", reservations=reservations)
 
 
+def manager_reservations_auxiliar():
+    current_day = date.today()
+    # Show one week future projections (by timedelta(days=3), timedelta(weeks=1))
+    future = current_day + timedelta(weeks=1)  # or (days=7)
+    past = current_day - timedelta(weeks=1)
+    # MANAGER WILL SEE ONE WEEK BEFORE AND ONE WEEK LATTER FROM TODAY
+    projections = model.Projection.query.filter(model.Projection.day <= future, model.Projection.day >= past).order_by(model.Projection.day.asc(), model.Projection.time.asc()).all()
+    num_results = []
+    for proj in projections:
+        num_results.append(proj.screen.num_total_seats - compute_reserved_seats(proj.id))
+    return projections, num_results
 
 
 def compute_reserved_seats(id):
@@ -135,6 +129,12 @@ def compute_reserved_seats(id):
     #         return  num_free_seats          
     return  num_free_seats
 
+
+
+
+
+
+# AJAX
 @bp.route('/ajax', methods=['POST', 'GET'])
 def process_ajax():
     if request.method == "POST":
@@ -142,7 +142,10 @@ def process_ajax():
 
         results = {}
         for proj in projections:
+            seats = compute_reserved_seats(proj.id)
             # results[proj.id] = proj.screen.num_total_seats
-            results[proj.id] = compute_reserved_seats(proj.id)
+            results[proj.id] = {'left':seats,'available': proj.screen.num_total_seats - seats}
         result = results
     return jsonify(result=result)
+
+

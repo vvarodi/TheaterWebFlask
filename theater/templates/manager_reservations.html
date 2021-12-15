@@ -14,14 +14,15 @@
                     <th>Title</th>
                     <th>Screen</th>
                     <th>Total Seats</th>
-                    <th>Seats Left</th>
+                    <th>Seats Available</th>
+                    <th>Seats Booked</th>
                     <th>Day</th>
                     <th>Time</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                    {% for projection in projections %}
+                    {% for projection, result in packed: %}
             
                     {% set proj = "proj"  ~ projection.id  %}
             
@@ -31,6 +32,7 @@
                         <td>{{ projection.screen.name }}</td>
                         <td>{{ projection.screen.num_total_seats }}</td>
                         <td class="seats"></td>
+                        <td>{{ result }}</td>
                         <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
                         <td>{{ projection.time.strftime('%H:%M') }}</td>
                         <td><a class="green" href="{{ url_for('manager.manager_reservation', id=projection.id) }}">SEE RESERVATIONS</a></td>

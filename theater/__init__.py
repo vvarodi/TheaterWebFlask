@@ -30,6 +30,7 @@ def create_app(test_config=None):
         return model.User.query.get(int(user_id))
 
     # register blueprints
+    
     from . import main
     from . import auth
     from . import manager
