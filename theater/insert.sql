@@ -11,31 +11,22 @@ insert into movie VALUES
 (4, "Dune", "Denis Villeneuve", 195, "Timothée Chalamet, Rebecca Ferguson, Zendaya","Feature adaptation of Frank Herbert's science fiction novel, about the son of a noble family entrusted with the protection of the most valuable asset and most vital element in the galaxy.","https://cdn.shopify.com/s/files/1/0057/3728/3618/products/dune_tfc43wep_480x.progressive.jpg?v=1634918156"),
 (5, "Spencer", "Pablo Larraín", 111, "Kristen Stewart, Timothy Spall, Jack Nielen","During her Christmas holidays with the royal family at the Sandringham estate in Norfolk, England, Diana Spencer, struggling with mental health problems, decides to end her decade-long marriage to Prince Charles.","https://cdn.shopify.com/s/files/1/0057/3728/3618/products/spencer_sbxxrd3u_480x.progressive.jpg?v=1635440026"),
 (6, "Last Night in Soho", "Edgar Wright", 116, "Thomasin McKenzie, Anya Taylor-Joy, Matt Smith","An aspiring fashion designer is mysteriously able to enter the 1960s where she encounters a dazzling wannabe singer. But the glamour is not all it appears to be and the dreams of the past start to crack and splinter into something dangerous.","https://cdn.shopify.com/s/files/1/0057/3728/3618/products/last_night_in_soho_ver2_480x.progressive.jpg?v=1633027853");
--- (7, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (8, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (9, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (10, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (11, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (12, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (13, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (14, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","",""),
--- (15, "Forrest Gump", "Robert Zemeckis", 182, "Tom Hanks, Robin Wright, Gary Sinise","","");
+(7, "Joker","Todd Phillips",122,"Joaquin Phoenix, Robert De Niro, Zazie Beetz","In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.","https://cdn.shopify.com/s/files/1/0057/3728/3618/products/JOKER.PW.REP_480x.progressive.jpg?v=1574965207")
 
 insert into screen VALUES
-(91, "H1", 30),
-(81, "H2", 30),
-(71, "H3", 40);
+(1, "Hall 1", 30),
+(2, "Hall 2", 15),
+(3, "Hall 3", 40);
 
 insert into projection VALUES
-(111, '2021-12-13', '20:00:00',1, 91),
-(222, '2021-12-13', '17:30:00',2, 81),
-(333, '2021-12-14', '12:00:00',3, 71),
-(444, '2021-12-14', '18:30:00',4, 91),
-(555, '2021-12-14', '19:45:00',5, 81),
-(666, '2021-12-15', '13:50:00',6, 71),
-(777, '2021-12-15', '20:45:00',1, 91),
-(888, '2021-12-16', '23:50:00',1, 81),
-(999, '2021-12-17', '12:00:00',1, 71);
+(111, '2021-12-15', '20:00:00',1, 1),
+(222, '2021-12-16', '17:30:00',1, 2),
+(333, '2021-12-16', '12:00:00',2, 3),
+(444, '2021-12-16', '18:30:00',3, 1),
+(555, '2021-12-17', '19:45:00',1, 2),
+(666, '2021-12-17', '13:50:00',6, 3),
+(777, '2021-12-18', '20:45:00',6, 1),
+(888, '2021-12-20', '12:00:00',1, 3);
 
 
 

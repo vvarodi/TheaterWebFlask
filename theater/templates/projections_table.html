@@ -5,7 +5,7 @@
         <th>Movie Poster</th>
         <th>Title</th>
         <th>Screen</th>
-        <th>Seats Left</th>
+        <th>Seats Available</th>
         <th>Day</th>
         <th>Time</th>
         <th></th>
@@ -23,8 +23,7 @@
             <td class="seats"></td>
             <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
             <td>{{ projection.time.strftime('%H:%M') }}</td>
-            <td class="sold"><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>
-            
+            <td class="sold"><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>    
         </tr>
         {% endfor %}
     </tbody>

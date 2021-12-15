@@ -4,42 +4,47 @@
 
 
 {% if projection != None %}
-<section class='form'>
-    <h2>&nbsp;&nbsp;EDIT PROJECTION&nbsp;&nbsp;</h2>
-    <form action="{{ url_for('manager.add_post') }}" method="post">
+    <section class='form'>
+        <h2>&nbsp;&nbsp;EDIT PROJECTION&nbsp;&nbsp;</h2>
+        <form action="{{ url_for('manager.edit_post', id=current_data.id) }}" method="post">
+            
+            <div>
+                <label>Movie: <br></label>
+                <select name="movie" required>
+                <option value="{{current_data.movie.id}}" selected>{{current_data.movie.title}}</option>
+                {% for movie in movies %}
+                    {% if movie.id != current_data.movie.id %}
+                        <option value="{{movie.id}}">{{movie.title}}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label><br>Screen: <br></label>
+                <select name="screen" required>
+                <option value="{{current_data.screen.id}}" selected>{{current_data.screen.name}}</option>
+                {% for screen in screens %}
+                    {% if screen.id != current_data.screen.id %}
+                        <option value="{{screen.id}}">{{screen.name}}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label><br>Date:<br></label>
+                <input type="date" name="day" value="{{current_data.day}}" min="2021-01-01" max="2022-12-31" required>
+            </div>
+            <div>
+                <label><br>Time:<br></label>
+                <input type="time" name="time" value="{{current_data.time}}" required>
+            </div>
+            
+            <div><input class='submit' type="submit" value="Edit"/></div>
         
- 
-        <div>
-            <label>Movie: <br></label>
-            <select name="movie" required>
-            {% for movie in movies %}
-                <option value="{{movie.id}}">{{movie.title}}</option>
-            {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label><br>Screen: <br></label>
-            <select name="screen" required>
-            {% for screen in screens %}
-                <option value="{{screen.id}}">{{screen.name}}</option>
-            {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label><br>Date:<br></label>
-            <input type="date" name="day" value="{{current_day}}" min="2021-01-01" max="2022-12-31" required>
-        </div>
-        <div>
-            <label><br>Time:<br></label>
-            <input type="time" name="time" value="00:00" required>
-        </div>
         
-        <div><input class='submit' type="submit" value="Add"/></div>
-     
-      
-    </form>
+        </form>
 
-</section>
+    </section>
 {% endif %}
 
 

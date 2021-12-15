@@ -15,8 +15,8 @@ var interactiveForm = function(callback = null){
                 callback(result)
             }
             else{
-                console.log(result.result[CProj]);
-                console.log(result.result);
+                // console.log(result.result[CProj]);
+                // console.log(result.result);
 
                 if (result.result[CProj] > 0)
                 {
@@ -62,8 +62,9 @@ var Price = function(){
 }  
 
 $(document).ready(function(){
+    
     interactiveForm (function(data) {
-        console.log(data['result']);
+        // console.log(data['result']);
 
         for (var key in data['result']){
             if (data['result'][key] <= 0){

@@ -1,3 +1,4 @@
+
 body {
     background-image: url(/static/background_blue_dark.jpg);
     background-repeat: no-repeat;
@@ -76,7 +77,6 @@ h2:before, h2:after {
   display: grid;
   grid-auto-flow: column;
   gap: 1rem;
-  /* height: calc(180px + 1rem); */
   padding: 1rem;
   width: 100%;
   overflow-y: auto;
@@ -100,7 +100,7 @@ h2:before, h2:after {
 
 .form {
   width: 400px;
-  height: 70vh;
+  height: calc(100% ); /*70vh;*/
   margin: 10px auto ;
   text-align: center; 
 

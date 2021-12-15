@@ -3,42 +3,42 @@
 {% block content %}
 {% include 'auth/error.html' %}
 {% if projection != None %}
-<section class='form'>
-    <h2>&nbsp;&nbsp;Buy Ticket&nbsp;&nbsp;</h2>
-    <form action="{{ url_for('main.reservation_post') }}" method="post">
-        
-        <div><img id="movie_image" src={{projection.movie.img}}  width=100 style="border-radius: 15px;"></div>
-        <label><br>{{projection.movie.title}}<br></label>
-        <div><select id="projection" name="projection" onchange='interactiveForm();'>
-            {% for proj in projections %}
-                {% if proj.id == projection.id %}
-                <option value="{{proj.id}}" selected><b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time.strftime('%H:%M')}} Screen: {{proj.screen.name}}</option>
-                {% else %}
-                <option value="{{proj.id}}"><b></b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time.strftime('%H:%M')}} Screen: {{proj.screen.name}}</option>
-                {% endif %}
-            {% endfor %}
-            </select>
-        </div>
-        
-        <div id="more-seats">
-            <div><label><br>Number of seats<br></label>
-                <select id="seats" name="seats" onchange='Price();'>
-                    <option id="option-seats" value="1" selected>1</option>
+    <section class='form'>
+        <h2>&nbsp;&nbsp;Buy Ticket&nbsp;&nbsp;</h2>
+        <form action="{{ url_for('main.reservation_post') }}" method="post">
+            
+            <div><img id="movie_image" src={{projection.movie.img}}  width=100 style="border-radius: 15px;"></div>
+            <label><br>{{projection.movie.title}}<br></label>
+            <div><select id="projection" name="projection" onchange='interactiveForm();'>
+                {% for proj in projections %}
+                    {% if proj.id == projection.id %}
+                    <option value="{{proj.id}}" selected><b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time.strftime('%H:%M')}} Screen: {{proj.screen.name}}</option>
+                    {% else %}
+                    <option value="{{proj.id}}"><b></b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time.strftime('%H:%M')}} Screen: {{proj.screen.name}}</option>
+                    {% endif %}
+                {% endfor %}
                 </select>
             </div>
-            <br>
+            
+            <div id="more-seats">
+                <div><label><br>Number of seats<br></label>
+                    <select id="seats" name="seats" onchange='Price();'>
+                        <option id="option-seats" value="1" selected>1</option>
+                    </select>
+                </div>
+                <br>
+            
+                <div><a id="price"></a></div>
+                <div><input class='submit' type="submit" value="Buy"/></div>
+            </div>
         
-            <div><a id="price"></a></div>
-            <div><input class='submit' type="submit" value="Buy"/></div>
-        </div>
-    
-        <div id="no-more-seats">
-            <p>NO MORE AVAILABLE SEATS. CHECK ALL OPTIONS.</p>
-        </div>
-        
-    </form>
+            <div id="no-more-seats">
+                <p>NO MORE AVAILABLE SEATS. CHECK ALL OPTIONS.</p>
+            </div>
+            
+        </form>
 
-</section>
+    </section>
 {% endif %}
 
 <section class="movie-projections">

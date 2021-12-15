@@ -1,5 +1,5 @@
 # Only view for manager user
-from flask import request, redirect, url_for, render_template, Blueprint
+from flask import request, redirect, url_for, render_template, Blueprint, flash
 from flask_login import current_user
 import flask_login
 from . import model
@@ -24,9 +24,20 @@ def manager_only(f):
 @flask_login.login_required
 @manager_only
 def schedule():
-    
     projections, num_results = manager_reservations_auxiliar()
     return render_template("manager_schedule.html", packed=zip(projections, num_results), projections=projections)
+
+
+@bp.route("/delete/<int:id>")
+@flask_login.login_required
+@manager_only
+def delete(id):
+    current_data = model.Projection.query.get(id)
+    db.session.delete(current_data)
+    db.session.commit()
+    flash("You have deleted a projection", 'success')
+    return redirect(url_for("manager.schedule"))
+
 
 @bp.route("/edit/<int:id>")
 @flask_login.login_required
@@ -34,8 +45,8 @@ def schedule():
 def edit(id):
     movies = model.Movie.query.all()
     screens = model.Screen.query.all()
-    current_day = date.today().strftime('%Y-%m-%d')
-    return render_template("manager_add.html", movies=movies, screens=screens, current_day=current_day)
+    current_data = model.Projection.query.get(id)
+    return render_template("manager_edit.html", movies=movies, screens=screens, current_data=current_data)
 
 
 @bp.route("/edit/<int:id>", methods=["POST"])
@@ -46,18 +57,18 @@ def edit_post(id):
     screen = request.form.get("screen")
     day = request.form.get("day")
     time = request.form.get("time")
-    time = time + ':00'
+   
     day = datetime.strptime(day, "%Y-%m-%d").date()
     time = datetime.strptime(time, "%H:%M:%S").time()
 
-    projection = model.Projection.query.filter_by(model.Projection.id == id).first()
+    projection = model.Projection.query.filter(model.Projection.id == id).first()
     projection.day = day
     projection.time = time
     projection.movie_id = movie
     projection.screen_id = screen 
 
     db.session.commit()
-
+    flash("You have edited a projection", 'success')
     return redirect(url_for("manager.schedule"))
 
 

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% include 'auth/error.html' %}
     <section>
         <h2>&nbsp;&nbsp;Our Projections&nbsp;&nbsp;</h2>
 
@@ -24,24 +25,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for projection, result in packed: %}
-                {% set proj = "proj"  ~ projection.id  %}
-                <tr id="{{proj}}">
-                    <td>{{projection.id}}</td>
-                    <td>{{ projection.movie.title }}</td>
-                    <td>{{ projection.screen.name }}</td>
-                    <td>{{ projection.screen.num_total_seats }}</td>
-                    <td class="seats"></td>
-                    <td>{{ result }}</td>
-                    <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
-                    <td>{{ projection.time }}</td>
-                    {% if result > 0 %}
-                        <td>Cannot modify projections with reservations</td>
-                    {% else %}
-                        <td><a class="red" href="{{ url_for('manager.edit', id=projection.id) }}">Delete</a>  <a class="green" href="{{ url_for('manager.edit', id=projection.id) }}">Edit</a></td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
+                    {% for projection, result in packed: %}
+                        {% set proj = "proj"  ~ projection.id  %}
+                        <tr id="{{proj}}">
+                            <td>{{projection.id}}</td>
+                            <td>{{ projection.movie.title }}</td>
+                            <td>{{ projection.screen.name }}</td>
+                            <td>{{ projection.screen.num_total_seats }}</td>
+                            <td class="seats"></td>
+                            <td>{{ result }}</td>
+                            <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
+                            <td>{{ projection.time }}</td>
+                            {% if result > 0 %}
+                                <td>Cannot modify projections<br> with reservations</td>
+                            {% else %}
+                                <td><a class="red" href="{{ url_for('manager.delete', id=projection.id) }}">Delete</a> 
+                                     <a class="green" href="{{ url_for('manager.edit', id=projection.id) }}">Edit</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
                 
