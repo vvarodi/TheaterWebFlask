@@ -14,7 +14,7 @@
                     {% if current_user.role == current_user.role.__class__.manager %}
                         <a href="{{ url_for('main.index') }}">Home</a>
                         <a href="{{ url_for('manager.reservations') }}">Reservations</a>
-                        <a href="{{ url_for('manager.schedule') }}">Schedule Showtimes</a>
+                        <a href="{{ url_for('manager.schedule') }}">Projections</a>
                         <a href="{{ url_for('auth.logout') }}">Log out</a> 
                     {% elif current_user.role == current_user.role.__class__.customer %}
                         <a href="{{ url_for('main.index') }}">Home</a>

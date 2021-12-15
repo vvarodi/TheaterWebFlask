@@ -2,7 +2,6 @@ from datetime import date, datetime, timedelta
 import dateutil.tz
 
 from flask import Blueprint, render_template, request, flash, url_for, redirect
-from flask.json import jsonify
 import flask_login
 from flask_login import current_user # current_user variable will be available with the data of the currently authenticated user.
 from sqlalchemy import func
@@ -44,10 +43,16 @@ def movie(id):
 @flask_login.login_required
 def user():
     current_day = date.today()
-    current_time = datetime.now()
-    reservations = model.Reservation.query.filter(model.Reservation.user_id == current_user.id).all()
-
-    return render_template('user.html', reservations = reservations)
+    now = []
+    past = []
+    now_reservations = model.Reservation.query.filter(model.Reservation.user_id == current_user.id).order_by(model.Reservation.date_time).all()
+    for res in now_reservations:
+        if res.projection.day >= current_day:
+            now.append(res)
+        else:
+            past.append(res)
+    # past_reservations = model.Reservation.query.filter(model.Reservation.user_id == current_user.id, model.Reservation.projection.day < current_day).all()
+    return render_template('user.html', now_reservations = now, past_reservations = past)
 
 
 @bp.route("/reservation/", defaults={'id': None})
@@ -82,35 +87,3 @@ def reservation_post():
     return redirect(url_for("main.index"))
 
 
-
-def compute_reserved_seats(id):
-    projection = model.Projection.query.filter(model.Projection.id == id).one()
-    sum_result = db.session.query(
-        db.func.sum(model.Reservation.num_seats).label('reserved')
-    ).filter(
-        model.Reservation.projection == projection
-    ).one()
-    num_reserved_seats = sum_result.reserved
-    if (sum_result.reserved != None):
-        num_free_seats = projection.screen.num_total_seats - num_reserved_seats
-    else:
-        num_free_seats = projection.screen.num_total_seats 
-    # q = db.session.query(model.Reservation.projection_id, func.sum(model.Reservation.num_seats)).group_by(model.Reservation.projection_id).all()
-    # for lst in q:
-    #     num_reserved_seats = lst[1]
-    #     if lst[0] == id:
-    #         num_free_seats = projection.screen.num_total_seats - num_reserved_seats
-    #         return  num_free_seats          
-    return  num_free_seats
-
-@bp.route('/ajax', methods=['POST', 'GET'])
-def process_ajax():
-    if request.method == "POST":
-        projections = model.Projection.query.all()
-
-        results = {}
-        for proj in projections:
-            # results[proj.id] = proj.screen.num_total_seats
-            results[proj.id] = compute_reserved_seats(proj.id)
-        result = results
-    return jsonify(result=result)

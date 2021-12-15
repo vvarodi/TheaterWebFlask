@@ -12,9 +12,9 @@
         <div><select id="projection" name="projection" onchange='interactiveForm();'>
             {% for proj in projections %}
                 {% if proj.id == projection.id %}
-                <option value="{{proj.id}}" selected><b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
+                <option value="{{proj.id}}" selected><b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time.strftime('%H:%M')}} Screen: {{proj.screen.name}}</option>
                 {% else %}
-                <option value="{{proj.id}}"><b></b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time}} Screen: {{proj.screen.name}}</option>
+                <option value="{{proj.id}}"><b></b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}} Time:{{proj.time.strftime('%H:%M')}} Screen: {{proj.screen.name}}</option>
                 {% endif %}
             {% endfor %}
             </select>

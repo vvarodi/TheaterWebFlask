@@ -5,13 +5,20 @@
         <h3 style="text-align: center;background-image: linear-gradient(45deg, #78eff3, #af4261);height: 50px;line-height:50px;font-family: 'Courier New', monospace;border-radius: 17px;">&nbsp;&nbsp;Welcome to Your Profile {{current_user.name}}&nbsp;&nbsp;</h3>
         <!-- <h2>&nbsp;&nbsp;Your Favourite Movies&nbsp;&nbsp;</h2> -->
         <h2>&nbsp;&nbsp;Current reservations&nbsp;&nbsp;</h2>
-        {% if reservations | length > 0 %}
-    
-            {% include 'reservations_table.html' %}
-          
-        {% else%}
-            <p style="text-align: center">YOU DON'T HAVE RESERVATIONS.</p>
-        {% endif %}
+            {% if now_reservations | length > 0 %}
+                {% set reservations = now_reservations %}
+                {% include 'reservations_table.html' %}
+            
+            {% else%}
+                <p style="text-align: center">YOU DON'T HAVE BOOKED RESERVATIONS.</p>
+            {% endif %}
         <h2>&nbsp;&nbsp;Past reservations&nbsp;&nbsp;</h2>
+            {% if past_reservations | length > 0 %}
+                {% set reservations = past_reservations %}
+                {% include 'reservations_table.html' %}
+        
+            {% else%}
+                <p style="text-align: center">YOU DON'T HAVE BOOKED RESERVATIONS.</p>
+            {% endif %}
     </section>
 {% endblock %}

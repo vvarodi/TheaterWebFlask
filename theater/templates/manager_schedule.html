@@ -6,6 +6,7 @@
 
         <a class="buttom" href="{{ url_for('manager.add')}}" style="display:block;">ADD A NEW PROJECTION</a>
         <br>
+        
         {% if projections | length > 0 %}
             
             <table class="table-slidedown">
@@ -14,23 +15,31 @@
                     <th>Movie Poster</th>
                     <th>Title</th>
                     <th>Screen</th>
+                    <th>Total Seats</th>
                     <th>Seats Left</th>
+                    <th>Seats Booked</th>
                     <th>Day</th>
                     <th>Time</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for projection in projections %}
-                <tr>
+                {% for projection, result in packed: %}
+                {% set proj = "proj"  ~ projection.id  %}
+                <tr id="{{proj}}">
                     <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
                     <td>{{ projection.movie.title }}</td>
                     <td>{{ projection.screen.name }}</td>
-                    <td>{{ projection.screen.num_total_seats }}</td>  // change here
+                    <td>{{ projection.screen.num_total_seats }}</td>
+                    <td class="seats"></td>
+                    <td>{{ result }}</td>
                     <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
                     <td>{{ projection.time }}</td>
-                    <td><a class="buttom" href="{{ url_for('manager.edit', id=projection.id) }}">Edit</a></td>
-                    
+                    {% if result > 0 %}
+                        <td>Cannot modify projections with reservations</td>
+                    {% else %}
+                        <td><a class="red" href="{{ url_for('manager.edit', id=projection.id) }}">Delete</a><a class="green" href="{{ url_for('manager.edit', id=projection.id) }}">Edit</a></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
                 </tbody>

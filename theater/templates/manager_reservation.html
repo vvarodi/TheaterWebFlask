@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if reservations | length > 0%}
+    <table>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>User Name</th>
+            <th>Projection Movie</th>
+            <th>Projection Day</th>
+            <th>Projection Time</th>
+            <th>Num Seats Reserved</th>
+            <th>Date Reservation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.user.name }}</td>
+            <td>{{ reservation.projection.movie.title }}</td>
+            <td>{{ reservation.projection.day.strftime('%d-%m-%Y') }}</td> 
+            <td>{{ reservation.projection.time }}</td>
+            <td>{{ reservation.num_seats }}</td>
+            <td>{{ reservation.date_time }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="text-align: center">THERE ARE NO RESERVATIONS FOR THIS PROJECTION </p>
+{% endif %}
+{% endblock %}

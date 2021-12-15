@@ -22,8 +22,8 @@
             <td>{{ projection.screen.name }}</td>
             <td class="seats"></td>
             <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
-            <td>{{ projection.time }}</td>
-            <td><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>
+            <td>{{ projection.time.strftime('%H:%M') }}</td>
+            <td class="sold"><a class="buttom" href="{{ url_for('main.reservation', id=projection.id) }}">Buy Ticket</a></td>
             
         </tr>
         {% endfor %}

@@ -1,7 +1,7 @@
 
 
 
-<table class="table-movies">
+<table class="table-reservations">
     <thead>
     <tr>
         <th>Movie Poster</th>
@@ -20,9 +20,10 @@
         <td><a href="{{ url_for('main.movie', id=reservation.projection.movie.id) }}"><img src={{reservation.projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
         <td>{{ reservation.projection.movie.title }}</td>
         <td>{{ reservation.projection.screen.name }}</td>
-        <td>{{ reservation.projection.screen.num_total_seats }}</td>  // change here
+        <td>{{ reservation.num_seats }}</td>
         <td>{{ reservation.projection.day.strftime('%d-%m-%Y') }}</td>
-        <td>{{ reservation.projection.date_time }}</td>
+        <td>{{ reservation.projection.time.strftime('%H:%M') }}</td>
+        <td>{{ reservation.date_time }}</td>
         <td></td>
         
     </tr>

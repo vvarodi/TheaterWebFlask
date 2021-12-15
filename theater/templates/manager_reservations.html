@@ -2,40 +2,46 @@
 
 {% block content %}
     <section>
-        <h2>&nbsp;&nbsp;Reservations&nbsp;&nbsp;</h2>
+        <h2>&nbsp;&nbsp;See Reservations&nbsp;&nbsp;</h2>
 
     
-        {% if reservations | length > 0 %}
+        {% if projections | length > 0 %}
             
-            <table class="table-slidedown">
+            <table>
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>User Name</th>
-                    <th>Projection Movie</th>
-                    <th>Projection Day</th>
-                    <th>Projection Time</th>
-                    <th>Num Seats Reserved</th>
-                    <th>Date Reservation</th>
+                    <th>Movie Poster</th>
+                    <th>Title</th>
+                    <th>Screen</th>
+                    <th>Total Seats</th>
+                    <th>Seats Left</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for reservation in reservations %}
-                <tr>
-                    <td>{{ reservation.id }}</td>
-                    <td>{{ reservation.user.name }}</td>
-                    <td>{{ reservation.projection.movie.title }}</td>
-                    <td>{{ reservation.projection.day.strftime('%d-%m-%Y') }}</td> 
-                    <td>{{ reservation.projection.time }}</td>
-                    <td>{{ reservation.num_seats }}</td>
-                    <td>{{ reservation.date_time }}</td>
-                </tr>
-                {% endfor %}
+                    {% for projection in projections %}
+            
+                    {% set proj = "proj"  ~ projection.id  %}
+            
+                    <tr id="{{proj}}">
+                        <td><a href="{{ url_for('main.movie', id=projection.movie.id) }}"><img src={{projection.movie.img}} width=120 style="border-radius: 15px;"></a></td>
+                        <td>{{ projection.movie.title }}</td>
+                        <td>{{ projection.screen.name }}</td>
+                        <td>{{ projection.screen.num_total_seats }}</td>
+                        <td class="seats"></td>
+                        <td>{{ projection.day.strftime('%d-%m-%Y') }}</td>
+                        <td>{{ projection.time.strftime('%H:%M') }}</td>
+                        <td><a class="green" href="{{ url_for('manager.manager_reservation', id=projection.id) }}">SEE RESERVATIONS</a></td>
+                        
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
                 
         {% else%}
-            <p style="text-align: center">THERE ARE NO RESERVATIONS</p>
+            <p style="text-align: center">THERE ARE NO PROJECTIONS</p>
         {% endif %}
     </section>
 {% endblock %}

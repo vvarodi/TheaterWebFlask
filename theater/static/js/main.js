@@ -70,7 +70,8 @@ $(document).ready(function(){
 
         for (var key in data['result']){
             if (data['result'][key] <= 0){
-                $("#proj" + key.toString() + " td.seats").html("<p style='color:red;'>Sold out<p>");
+                $("#proj" + key.toString() + " td.seats").html("<p style='color:red;'>0<p>");
+                $("#proj" + key.toString() + " td.sold").html("<a class='red'}}'>SOLD OUT</a>")
             }else{
                 $("#proj" + key.toString() + " td.seats").html(data['result'][key]);
             }

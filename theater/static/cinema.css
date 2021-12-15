@@ -186,6 +186,32 @@ table td, table th{
 }
 
 
+
+
+.green {
+  overflow: hidden;
+  white-space: nowrap;  /*avoids the bad resizing when window smaller*/
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none; /* without link line*/
+  font-size: 12px; 
+  line-height: 25px;
+  border-radius: 12px; 
+  background-color: rgb(15, 158, 15);
+}
+.red {
+  overflow: hidden;
+  white-space: nowrap;  /*avoids the bad resizing when window smaller*/
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none; /* without link line*/
+  font-size: 12px; 
+  line-height: 25px;
+  border-radius: 12px; 
+  background-color: red;
+}
 .buttom {
   overflow: hidden;
   white-space: nowrap;  /*avoids the bad resizing when window smaller*/
