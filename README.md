@@ -27,18 +27,19 @@ Project Statement:
 - <a href="ProjectStatement.html">Project Statement</a>
 
 
-## Theater App Screenshots
-
+<details open="open">
+    <summary><h2>Theater App Screenshots</h2></summary>
+    
 <table>
-  <tr>
+<tr>
     <th>Sign Up</th>
     <th>Login</th>
-  </tr>
-  <tr>
+</tr>
+<tr>
     <td><img src="screenshots/signup.png"></td>
     <td><img src="screenshots/login.png"></td>
-  </tr>
- </table>
+</tr>
+</table>
 
 <table>
   <tr>
@@ -61,3 +62,4 @@ Project Statement:
     <td><img src="screenshots/home.png"></td>
   </tr>
  </table>
+</details>
