@@ -2,6 +2,8 @@
   <img src="theater/static/icon.ico"/> 
   Theater Web App with Flask
 </h1>
+<h5 align="center">A theater management and ticket booking system</h5>
+<h6 align="center">Written during my 3 year 1st semester [Bachelor in Data Science and Engineering](https://www.uc3m.es/bachelor-degree/data-science#program) </h6>
 
 ## Table of Contents
 - [Project Description](#project-description)
