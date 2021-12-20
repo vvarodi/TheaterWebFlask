@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Project: online surveys platform</title>
+    <link rel="stylesheet" href="../../asignatura.css">
+    <link rel="stylesheet" href="../../practica.css">
+    <link rel="stylesheet" href="../../highlight/default.css">
+</head>
+
+<body class="practica">
+    <main>
+        <section class="titulo">
+            <header>
+                <h1>Project: movie theater</h1>
+            </header>
+        </section>
+        <section id="introduction">
+            <header>
+                <h2>Introduction</h2>
+            </header>
+            <p>
+                You'll develop the web application
+                of a movie theater
+                with several screens.
+                Customers will be able to
+                browse the schedule for the current day
+                and the next few days,
+                and make reservations.
+                Theater managers will be able
+                to define the schedule
+                (which movies will be projected,
+                in which screens and at what times)
+                and check how reservations go for each projection.
+            </p>
+            <p>
+                The project will be divided into mandatory functionality,
+                which every submission must implement,
+                and additional functionality.
+                For the latter,
+                students can freely choose other functionality
+                to integrate with their implementation.
+            </p>
+        </section>
+        <section id="terms">
+            <header>
+                <h2>Terms and conditions</h2>
+            </header>
+            <p>
+                The following terms and conditions apply:
+            </p>
+            <ul>
+                <li>
+                    The project has to be developed in pairs.
+                    Groups of three students or students working alone
+                    will only be permitted under special circumstances,
+                    and always with prior approval from the teachers.
+                </li>
+                <li>
+                    Sharing code between different groups is strictly forbidden,
+                    and might be considered and penalized as plagiarism.
+                </li>
+                <li>
+                    Your project must be developed either with Flask
+                    with the Python 3 programming language
+                    or Spring MVC with the Java language.
+                </li>
+                <li>
+                    Your project must work in the infrastructure of the laboratories
+                    with the assigned databases.
+                    You can work in your own computers if you prefer,
+                    but should regularly check that your code works properly
+                    in the lab computers.
+                </li>
+                <li>
+                    You'll get an appointment for an online evaluation interview after submission.
+                    That interview is mandatory for all the members of each group.
+                </li>
+            </ul>
+        </section>
+        <section id="mandatory">
+            <header>
+                <h2>Mandatory functionality</h2>
+            </header>
+            <p>
+                All submissions must implement the following functionality:
+            </p>
+            <ul>
+                <li>
+                    <span class="resaltar">User account management:</span>
+                    Users (customers and theater managers)
+                    will be able to create new accounts,
+                    log into their accounts and log out.
+                </li>
+                <li>
+                    <span class="resaltar">Movie showtimes:</span>
+                    Users will be able to browse the movies to be projected
+                    and showtimes for the current day and the next few days.
+                </li>
+                <li>
+                    <span class="resaltar">Seat reservations:</span>
+                    Customers will be able to reserve
+                    a number of seats for a specific movie projection.
+                    This feature doesn't include either letting users
+                    choose specific seats or processing payments.
+                </li>
+                <li>
+                    <span class="resaltar">Showtimes management:</span>
+                    Theater managers will be able to edit the schedule of projections.
+                    This feature consists in letting users with the <em>manager role</em>
+                    add or remove future movie projections to the showtimes
+                    (which movie will be projected,
+                    at what screen,
+                    at what date and time).
+                    For the purpose of this feature,
+                    movies are assumed to be already stored at the database:
+                    this feature doesn't include the edition of movie data.
+                </li>
+                <li>
+                    <span class="resaltar">Reservations status:</span>
+                    Theater managers will be able to see how reservations go
+                    for each movie projection
+                    (seats reserved vs. seats available).
+                    They will also be able to list all the reservations
+                    for each movie projection.
+                </li>
+
+            </ul>
+            <p>
+                Features not explicitly listed above aren't mandatory
+                and will be considered additional functionality.
+            </p>
+            <section>
+                <header>
+                    <h3>Data model</h3>
+                </header>
+                <p>
+                    Your project must support the following data model
+                    for the mandatory functionality.
+                    You can change the data model if you have justified reasons to do so.
+                    For example, you can enrich this data model
+                    because of the needs of any additional features you implement
+                    (add new entities, add new properties for some entities, etc.),
+                    or if you believe a different schema is better in the context
+                    of your design of the project.
+                </p>
+                <p>
+                    The main entities to store in the database are:
+                </p>
+                <ul>
+                    <li>
+                        <span class="resaltar">User:</span>
+                        Users are identified by an email
+                        and they authenticate with a password,
+                        which has to be stored salted and encrypted in the database.
+                        Most users will have the <em>customer role</em>,
+                        but some users have the <em>manager role</em>,
+                        which lets them use management features.
+                    </li>
+                    <li>
+                        <span class="resaltar">Movie:</span>
+                        Movies have a title, synopsis, duration, director, main cast
+                        and other data you want to show in your application.
+                        From the point of view of the mandatory functionality,
+                        you don't need to model directors, actors, etc.
+                        as separate entities of your model:
+                        you can treat them just as textual columns
+                        of the movies table.
+                    </li>
+                    <li>
+                        <span class="resaltar">Screen:</span>
+                        The theater has several screens,
+                        so that it can project several movies at the same time.
+                        Each screen has a name (or a number if you prefer so),
+                        which will appear in reservations
+                        so that customers know to which screen they must go,
+                        and a number of available seats.
+                    </li>
+                    <li>
+                        <span class="resaltar">Movie projection:</span>
+                        Each projection is defined by a movie, a screen
+                        and a projection date and time.
+                    </li>
+                    <li>
+                        <span class="resaltar">Movie reservation:</span>
+                        Each reservation is defined by the user who made it,
+                        a movie projection, a number of seats
+                        and the date and time the reservation was confirmed.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <header>
+                    <h3>Views</h3>
+                </header>
+                <p>
+                    Your application has to provide at least the following views:
+                </p>
+                <ul>
+                    <li>
+                        <span class="resaltar">Main view</span>
+                        (open for unauthenticated users):
+                        Users can browse the movies that will be projected
+                        this day and on the next few days.
+                        By clicking on a movie,
+                        users will enter that movie's view.
+                    </li>
+                    <li>
+                        <span class="resaltar">Movie view</span>
+                        (open for unauthenticated users):
+                        Users can see the details of a specific movie
+                        (title, synopsis, director, cast, duration, etc.)
+                        and its projection times for today and the next few days.
+                        Users should be able to see which projections have seats available
+                        and which ones are full.
+                        Authenticated customers should be able to initiate a reservation
+                        for a specific projection from this view.
+                        Theater managers should be able, from this view,
+                        to see the details of seats reserved vs. seats available
+                        and to list reservations
+                        for each projection.
+                    </li>
+                    <li>
+                        <span class="resaltar">Customer view</span>
+                        (requires authentication):
+                        Customers can see in this view
+                        their own future and past reservations.
+                    </li>
+                    <li>
+                        <span class="resaltar">Reservation view</span>
+                        (requires authentication,
+                        open only to the customer who owns the reservation
+                        or any user with the manager role):
+                        This view shows detailed data about a reservation.
+                        It should display, at least,
+                        the title of the movie,
+                        the screen number,
+                        the projection date and time,
+                        the owner of the reservation,
+                        the number of seats
+                        and the confirmation date and time.
+                        When a reservation is shown in any other view,
+                        it must be linked to this view.
+                    </li>
+                </ul>
+                <p>
+                    Take the list of views above as a suggestion.
+                    You are free to design your application with different views
+                    as long as you provide the same functionality.
+                    You can also change these views
+                    in order to accommodate additional features.
+                </p>
+            </section>
+            <section>
+                <header>
+                    <h3>Things that aren't included in the mandatory functionality</h3>
+                </header>
+                <p>
+                    As said before,
+                    features not explicitly listed above aren't mandatory
+                    and will be considered additional functionality.
+                    In particular,
+                    from the point of view of the mandatory functionality:
+                </p>
+                <ul>
+                    <li>
+                        You can insert movies manually in the database
+                        with the appropriate SQL commands.
+                        This way, they'll be available
+                        for showtimes management features.
+                    </li>
+                    <li>
+                        You can set the administrator role
+                        to specific users manually in the database,
+                        with the appropriate SQL commands.
+                        This way, you can create a user account
+                        with the normal functionality of your application
+                        and later assign the management role to it.
+                    </li>
+                    <li>
+                        You can insert the screens of the theater manually
+                        in the database,
+                        with the appropriate SQL commands.
+                    </li>
+                    <li>
+                        Customers don't need to be able to choose their seats.
+                        It's enough if they just specify the number of seats
+                        they want to reserve.
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section id="additional">
+            <header>
+                <h2>Additional functionality</h2>
+            </header>
+            <p>
+                Students will be free to choose additional functionality
+                to integrate into their project.
+                Any feature beyond the mandatory ones
+                will be considered to be additional.
+            </p>
+        </section>
+        <section id="evaluation">
+            <header>
+                <h2>Evaluation criteria</h2>
+            </header>
+            <p>
+                Evaluation will take into account
+                the correct implementation of
+                <a href="#mandatory">the mandatory functionality</a>
+                and <a href="#additional">additional functionality</a>,
+                as well as some quality aspects of their implementation:
+            </p>
+            <ul>
+                <li>
+                    <span class="resaltar">Mandatory functionality (7.5 points):</span>
+                    The maximum mark in this block
+                    will be awarded to submissions
+                    with an implementation
+                    for all the <a href="#mandatory">mandatory functionality</a>
+                    that works correctly and complies with all the
+                    <a href="#quality">quality requirements</a>
+                    listed below.
+                </li>
+                <li>
+                    <span class="resaltar">Additional functionality (2.5 points):</span>
+                    Students have to implement
+                    <a href="#additional">additional functionality</a>,
+                    also working correctly and complying with all the quality requirements.
+                    Points awarded to each implemented feature
+                    will depend on their complexity and quality.
+                    <em>Interesting</em> features,
+                    in the sense that their implementation goes beyond
+                    what we've seen in class,
+                    will get higher scores.
+                    One example of that is the use of JavaScript
+                    to make the application more interactive at the browser side
+                    and to communicate asynchronously with the server.
+                    <em>Boring</em> features,
+                    in the sense that they are quite repetitive
+                    with respect to other features you've already implemented
+                    could be awarded few points or no points at all.
+                    A brilliant user interface,
+                    in the sense that its appearance is remarkable,
+                    at the level of current standards for commercial applications,
+                    will also be considered an additional feature.
+                    You can check with your teachers
+                    how many points you could get
+                    with the features you plan to implement.
+                </li>
+            </ul>
+            <p id="quality">
+                The <span class="resaltar">quality requirements</span>
+                that will be taken into account are:
+            </p>
+            <ul>
+                <li>
+                    That each implemented feature works correctly,
+                    i.e. behaves as required.
+                </li>
+                <li>
+                    That source code is properly organized
+                    and clear to read and understand.
+                    It should follow the principles explained
+                    in laboratories 3 to 6
+                    in terms of code organization.
+                </li>
+                <li>
+                    That the use of HTML and CSS is correct.
+                </li>
+                <li>
+                    That the views of the application
+                    (its user interface)
+                    are clear and easy to use.
+                    That the visual appearance is <em>reasonably</em> good.
+                </li>
+                <li>
+                    That potential error situations
+                    are properly handled,
+                    giving users feedback when appropriate.
+                </li>
+            </ul>
+            <p>
+                <span class="resaltar">Warning:</span>
+                plagiarizing an academic work presented for continuous assessment
+                (such as this project)
+                is an offense.
+                Penalties in such situations
+                will be applied as stated in
+                <a href="https://e-archivo.uc3m.es/handle/10016/25001">UC3M regulations</a>,
+                according to which
+                the softer penalty for this offense
+                consists in a final mark of 0 <em>(SUSPENSO)</em> for the whole subject,
+                and worse penalties could also be decided by the instructor of the case
+                appointed by the Dean.
+            </p>
+        </section>
+        <section id="hints">
+            <header>
+                <h2>Implementation hints</h2>
+            </header>
+            <p>
+                This section gives some hints about how to implement certain mandatory features.
+                Teachers might add new hints to this section in the future,
+                when they think additional help with some features is appropriate.
+            </p>
+            <section>
+                <header>
+                    <h3>User accounts and authentication</h3>
+                </header>
+                <p>
+                    You can reuse the code you need
+                    from the Flask or Spring MVC laboratories.
+                    Reusing code from them
+                    won't be considered plagiarism.
+                </p>
+            </section>
+            <section>
+                <header>
+                    <h3>Manual insertions into the database</h3>
+                </header>
+                <p>
+                    For some entities, such as movies and screens,
+                    it is OK to manually insert them into the database,
+                    since it is not mandatory for your application
+                    to implement the code needed to create and edit them.
+                </p>
+                <p>
+                    Take into account the following considerations.
+                </p>
+                <section>
+                    <header>
+                        <div class="alternative-label">Flask</div>
+                    </header>
+                    <p>
+                        You can insert data manually into your database
+                        with SQL commands at a MySQL terminal
+                        or from a Python terminal
+                        by creating your entity objects with Python code
+                        and saving them
+                        as explained
+                        at <a href="../4-flask/index.html#manual-creation">Lab 4</a>.
+                    </p>
+                </section>
+                <section>
+                    <header>
+                        <div class="alternative-label">Spring MVC</div>
+                    </header>
+                    <p>
+                        There could be a collision between your row identifiers
+                        and the identifiers generated by the Hibernate ORM
+                        used by Spring MVC.
+                    </p>
+
+                    <p>
+                        In order to avoid collisions,
+                        you can first create the model classes
+                        and run the application,
+                        so that it creates all the tables
+                        for it in the database.
+                        Then, set manually
+                        the <code>next_val</code> column
+                        of the <code>hibernate_sequence</code> table
+                        to a large enough value (for example, 1,000).
+                        This means that the next automatic identifiers
+                        set by Hibernate will be 1,000, 1,001, etc.
+                        After that, you can insert manual data
+                        with identifiers smaller than 1,000,
+                        since the entities created by Spring will
+                        all of them have identifiers
+                        starting at 1,000.
+                        Be careful not to repeat identifiers
+                        even if they are associated to rows in separate tables.
+                    </p>
+                    <p>
+                        Remember to do the same every time you drop your tables
+                        and create them again,
+                        for example after having changed something in your model classes.
+                        Saving the SQL commands for manual insertions
+                        in a file is advisable,
+                        just in case you need to repeat them in the future.
+                    </p>
+                </section>
+                <section>
+                    <header>
+                        <h3>Data model: entity relationships</h3>
+                    </header>
+                    <p>
+                        Remember to add an id column to every entity,
+                        which will be the primary key of that table.
+                        Review your code of previous laboratories for examples
+                        of integer primary keys.
+                    </p>
+                    <p>
+                        Model many-to-one relationships the same way
+                        as in previous laboratories.
+                        For example,
+                        there is a many-to-one relationship
+                        between projections and movies,
+                        in the sense that a projection displays just one movie
+                        and a movie will be displayed in many projections.
+                        This relationship is similar to the relationship
+                        between messages and users in the laboratories,
+                        and therefore you should use similar annotations
+                        in order to model those relations.
+                    </p>
+                    <p>
+                        Other examples of many-to-one relationships
+                        are projections and screens,
+                        reservations and users,
+                        reservations and projections, etc.
+                    </p>
+                    <section>
+                        <header>
+                            <div class="alternative-label">Flask</div>
+                        </header>
+                        <p>
+                            Model <em>many-to-one</em> relationships
+                            by defining a <code>db.ForeignKey</code>
+                            at the <em>many</em> end
+                            and a <code>relationship</code>
+                            at the <em>one</em> end.
+                            The following example would model
+                            the relationship between reservations and users:
+                        </p>
+                        <pre class="code"><code>class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    (...)
+    reservations = db.relationship(
+        "Reservation",
+        backref="user",
+        lazy=True
+    (...)
+)
+
+class Reservation(db.Model):
+    (...)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    (...)</code></pre>
+
+                        <p>
+                            The <code>relationship</code> declaration
+                            will automatically create a <code>user</code> attribute
+                            at the <code>Reservation</code> class
+                            and a <code>reservations</code> attribute
+                            at the <code>User</code> class.
+                            Given a reservation called <code>reservation</code>,
+                            you can read or write its user through <code>reservation.user</code>.
+                            Given a user called <code>user</code>,
+                            you will access his or her list of reservations
+                            with <code>user.reservations</code>.
+                        </p>
+                    </section>
+                    <section>
+                        <header>
+                            <div class="alternative-label">Spring MVC</div>
+                        </header>
+                        <p>
+                            Model <em>many-to-one</em> relationships
+                            by defining a <code>@ManyToOne</code> annotation
+                            at the <em>many</em> end
+                            and a <code>@OneToMany</code> annotation
+                            at the <em>one</em> end.
+                            The following example would model
+                            the relationship between reservations and users:
+                        </p>
+                        <pre class="code"><code>@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private List&lt;Reservation> reservations;
+
+    (...)
+
+    public List&lt;Reservation> getReservations() {
+        return reservations;
+    }
+
+    (...)
+}
+
+@Entity
+public class Reservation {
+
+    (...)
+
+    @ManyToOne(optional = false)
+    private User user;
+
+    (...)
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    (...)
+}</code></pre>
+
+                        <p>
+                            Given a reservation called <code>reservation</code>,
+                            you can read or write its user
+                            with <code>reservation.getUser()</code>
+                            and <code>reservation.setUser(user)</code>.
+                            Given a user called <code>user</code>,
+                            you will access his or her list of reservations
+                            with <code>user.getReservations()</code>.
+                        </p>
+                    </section>
+                </section>
+                <section>
+                    <header>
+                        <h3>Data model: enumerated values</h3>
+                    </header>
+                    <p>
+                        A user of the application will have
+                        one of the following two roles:
+                        <em>customer</em> or <em>manager</em>.
+                        Instead of modeling them just as strings,
+                        it is better to use an enumerated data type.
+                    </p>
+                    <section>
+                        <header>
+                            <div class="alternative-label">Flask</div>
+                        </header>
+                        <p>
+                            Enumerated columns can be declared this way:
+                        </p>
+                        <pre class="codigo"><code>class UserRole(enum.Enum):
+    customer = 1
+    manager = 2
+
+class User(db.Model):
+    (...)
+    role = db.Column(db.Enum(UserRole), nullable=False)
+    (...)</code></pre>
+                        <p>
+                            The syntax to access these columns
+                            in your model objects is as follows:
+                        </p>
+                        <pre class="codigo"><code>user = model.User(
+    name="Mary",
+    role=model.UserRole.manager,
+    (...)
+)
+
+if user.role == model.UserRole.manager:
+    (...)</code></pre>
+
+                        <p>
+                            From Jinja templates, access is less intuitive:
+                        </p>
+                        <pre
+                            class="codigo"><code class="language-text">{% if user.role == user.role.__class__.manager %}</code></pre>
+                    </section>
+                    <section>
+                        <header>
+                            <div class="alternative-label">Spring MVC</div>
+                        </header>
+                        <p>
+                            Enumerated columns can be declared this way.
+                            First, create the <code>enum</code> class
+                            in a separate file:
+                        </p>
+                        <pre class="codigo"><code>public enum UserRole {
+    CUSTOMER, MANAGER
+}</code></pre>
+                        <p>
+                            Then,
+                            just use it in the column declaration:
+                        </p>
+                        <pre class="codigo"><code>@Entity
+public class User {
+    (...)
+    @Column(nullable = false)
+    private UserRole role;
+    (...)
+}</code></pre>
+                        <p>
+                            The use of these columns is straightforward:
+                        </p>
+                        <pre class="codigo"><code class="language-java">user.setRole(UserRole.CUSTOMER);
+if (user.getRole() == UserRole.CUSTOMER) {
+    (...)
+}</code></pre>
+
+                        <p>
+                            <em>Update (2/12/2021)</em>
+                        </p>
+                        <p>
+                            In Thymeleaf templates you can access <code>UserRole</code>
+                            by wrapping its full class name (which includes its package name)
+                            within <code>T()</code>.
+                            For example,
+                            if its full name is <code>theater.model.UserRole</code>:
+                        </p>
+                        <pre class="codigo"><code class="language-java">&lt;p th:if="${user.getRole() == T(theater.model.UserRole).CUSTOMER}">
+    You are a customer.
+&lt;/p></code></pre>
+                    </section>
+                </section>
+                <section>
+                    <header>
+                        <h3>Updating your data model</h3>
+                    </header>
+                    <p>
+                        It is normal,
+                        during the development of your project,
+                        and especially while defining your data model,
+                        needing to do some changes
+                        to a model that you have already created
+                        at your database.
+                    </p>
+                    <p>
+                        If you ever change your model classes,
+                        the easiest way to propagate changes to the already existing database
+                        is to remove all your tables and create them again
+                        (but note that you'll lose all the data you've stored there).
+                        In Flask, you can just run the following commands
+                        in a Python terminal:
+                    </p>
+                    <pre class="codigo"><code class="language-python"># Change 'theater' to your package's name below
+from theater import db, create_app
+app = create_app()
+db.drop_all(app=app)
+db.create_all(app=app)</code></pre>
+
+                    <p>
+                        In Spring MVC,
+                        drop all tables from a database terminal
+                        and restart your application.
+                        You may need to be careful with the order:
+                        drop first the tables that are not at the other end
+                        of a foreign key.
+                    </p>
+
+                    <p>
+                        If you need to store manual data in your database,
+                        remember to insert it again after the tables have been created.
+                    </p>
+
+                </section>
+            </section>
+            <section>
+                <header>
+                    <h3>Querying by date ranges</h3>
+                </header>
+                <p>
+                    In order to display showtimes
+                    you'll need to get movie projections for today and the next days.
+                    This sections gives to some hints
+                    about querying projections by dates.
+                </p>
+                <section>
+                    <header>
+                        <div class="alternative-label">Flask</div>
+                    </header>
+                    <p>
+                        You can query by date intervals with SQLAlchemy's
+                        <code>between</code> method:
+                    </p>
+                    <pre class="codigo"><code class="language-python">projections = model.Projection.query.filter(
+    model.Projection.date.between('20211102', '20211104')
+).order_by(model.Projection.date).all()</code></pre>
+
+                    <p>
+                        Note that the last day of your interval (Nov. 4 in the example)
+                        is not included in the results, because its time component is 0:00.
+                        Always set one day more to finish the interval.
+                    </p>
+
+                    <p>
+                        You can also use <code>datetime</code> objects instead of strings
+                        for specifying dates:
+                    </p>
+                    <pre class="codigo"><code class="language-python">import datetime
+now = datetime.datetime.now()
+projections = model.Projection.query.filter(
+    model.Projection.date.between(now, now + datetime.timedelta(days=3))
+).order_by(model.Projection.date).all()</code></pre>
+                    <p>
+                        You can also query for a specific date,
+                        but be careful to truncate the time part of your <code>DATETIME</code>
+                        objects before comparing for equality,
+                        by casting them do a <code>DATE</code> object in the database:
+                    </p>
+                    <pre class="codigo"><code class="language-python">import datetime
+today = datetime.date.today()
+projections = model.Projection.query.filter(
+    model.Projection.date.cast(db.Date) == today
+).order_by(model.Projection.date).all()</code></pre>
+                    <p>
+                        You can try your queries
+                        at a Python terminal
+                        by following the same steps explained
+                        at <a href="../4-flask/index.html#manual-creation">Lab 4</a>
+                        for manual creation of database data
+                        (the first lines with the imports
+                        and the <code>create_app</code> and <code>push</code> calls).
+                        If will probably save you time
+                        with respect to restarting your application
+                        every time you change a query.
+                    </p>
+                </section>
+                <section>
+                    <header>
+                        <div class="alternative-label">Spring MVC</div>
+                    </header>
+                    <p>
+                        In Spring Data JPA you can add the <code>between</code>
+                        keyword to the name of the method you define
+                        at the <em>repository</em> interface.
+                        For example,
+                        for an attribute named <code>date</code>
+                        at the <code>Projection</code> class
+                        you would add the following method to <code>ProjectionRepository</code>:
+                    </p>
+                    <pre class="codigo"><code class="language-python">import java.util.Date;
+import java.util.List;
+(...)
+List&lt;Projection> findByDateBetween(Date startDate, Date endDate);</code></pre>
+                    <p>
+                        The implementation of the method
+                        will be provided automatically by the framework.
+                    </p>
+                    <p>
+                        Note that the last day of your interval (Nov. 4 in the example)
+                        is not included in the results, because its time component is 0:00.
+                        Always set one day more to finish the interval.
+                    </p>
+                    <p>
+                        Finding all the projections for a specific date can be trickier.
+                        It can be done, for instance,
+                        by using the previous method with the end date set
+                        one day after the start date:
+                    </p>
+                    <pre class="codigo"><code class="language-java">import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+Date date = (...)
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(date);
+calendar.add(Calendar.DATE, 1);
+Date datePlusOne = calendar.getTime();
+List&lt;Projection> projectionsByDate = projectionRepository.findByDateBetween(date, datePlusOne);</code></pre>
+
+                    <p>
+                        You could wrap this code within a method at a service.
+                        This way, your controllers only need to invoke that method.
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <header>
+                    <h3>Computing reserved seats</h3>
+                </header>
+                <p>
+                    You'll need to be able to count the total number of seats
+                    that have been reserved for a movie projection.
+                    For example, you cannot accept reservations
+                    if there are not free seats enough.
+                </p>
+                <section>
+                    <header>
+                        <div class="alternative-label">Flask</div>
+                    </header>
+                    <p>
+                        You can use the <code>func.sum</code> function
+                        in order to run a query that sums values:
+                    </p>
+                    <pre class="codigo"><code class="language-python"># Example with the projection with id 10:
+projection = model.Projection.query.filter(model.Projection.id == 10).one()
+sum_result = db.session.query(
+    db.func.sum(model.Reservation.num_seats).label('reserved')
+).filter(
+    model.Reservation.projection == projection
+).one()
+num_reserved_seats = sum_result.reserved
+num_free_seats = projection.screen.num_seats - num_reserved_seats</code></pre>
+                </section>
+                <section>
+                    <header>
+                        <div class="alternative-label">Spring MVC</div>
+                    </header>
+                    <p>
+                        One way to count the seats that have been reserved for a projection
+                        is to write a JPQL query
+                        for a method at the repository interface for reservations:
+                    </p>
+                    <pre class="codigo"><code class="language-java">@Query("SELECT SUM(r.numSeats) FROM Reservation r WHERE r.projection=?1")
+int sumReservedSeats(Projection projection);</code></pre>
+
+                    <p>
+                        The implementation of the method
+                        will be automatically derived by Spring Data JPA
+                        from the query.
+                    </p>
+
+                    <p>
+                        <em>Update (2/12/2021)</em>
+                    </p>
+                    <p>
+                        With some models Spring might require you to change the method signature to:
+                    </p>
+                    <pre class="codigo"><code class="language-java">@Query("SELECT SUM(r.numSeats) FROM Reservation r WHERE r.projection=?1")
+Integer sumReservedSeats(Projection projection);</code></pre>
+
+                    <p>
+                        In that case, a <code>null</code> value could be returned
+                        when a projection with no reservations is selected.
+                        Handle that case from your controller explicitly,
+                        assigning 0 to the variable that stores the number of reserved seats
+                        if the method returns <code>null</code>.
+                    </p>
+                </section>
+            </section>
+        </section>
+        <section id="documentation">
+            <header>
+                <h2>Where to get documentation</h2>
+            </header>
+            <section>
+                <header>
+                    <div class="alternative-label">Flask</div>
+                </header>
+                <p>
+                    Refer to the
+                    <a href="https://flask.palletsprojects.com/en/2.0.x/">official Flask documentation</a>
+                    if you need help with the Flask framework.
+                    You may also read
+                    the <a href="https://jinja.palletsprojects.com/en/3.0.x/">official Jinja documentation</a>
+                    for help regarding the use of templates in Flask.
+                </p>
+                <p>
+                    You'll use the SQLAlchemy ORM
+                    for accessing your database.
+                    However,
+                    instead of using SQLAlchemy directly,
+                    you'll use the Flask-SQLAlchemy extension,
+                    which makes SQLAlchemy a little bit more convenient
+                    to use in Flask.
+                    However,
+                    it changes a few things with respect to vanilla SQLAlchemy.
+                    Read first <a href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/">the documentation of
+                        Flask-SQLAlchemy</a>
+                    and then the <a href="https://docs.sqlalchemy.org/en/14/orm/tutorial.html">ORM tutorial of
+                        SQLAlchemy</a>.
+                    For how to declare relationships between tables
+                    (one-to-one, one-to-many, many-to-many, etc.)
+                    you can refer to <a href="https://docs.sqlalchemy.org/en/14/orm/relationships.html">the Relationship
+                        Configuration guide</a>.
+                </p>
+            </section>
+            <section>
+                <header>
+                    <div class="alternative-label">Spring MVC</div>
+                </header>
+                <p>
+                    You can look at the
+                    <a
+                        href="https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html">official
+                        reference documentation of Spring MVC</a>.
+                    Check also the <a
+                        href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference">Spring Data
+                        JPA reference documentation</a>.
+                    <a href="https://www.thymeleaf.org/documentation.html">Official Thymeleaf documentation</a> is also
+                    available,
+                    including a manual on how to integrate Thymeleaf with Spring.
+                </p>
+            </section>
+        </section>
+    </main>
+</body>
+
+<script src="../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="../../toc.js"></script>
+
+</html>

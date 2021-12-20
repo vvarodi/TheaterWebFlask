@@ -1,21 +1,20 @@
-Viktoriia Varodi 100429843
-Natalia Carrasco 100429915
 
 
-Additional functionalities:
-
-manager.py: @manager_only. To avoid normal customer unauthorized access to paths as /edit /add
-
-manager.py: process_ajax(): Create a json for ajax call with data for each projection and its available seats. 
-
-static/js/main.js: 
-    interactiveForm: ajax call and used when onclick BuyTicket to show the corresponding available seats as a filter per projection
-    Price: onclick when user chooses the number of seats to show total price
-    when document.ready(): it updates the information for available seats using the json in the projection/reservation tables
+Mandatory functionality: 6.85 / 7.5
+(Reservation not implemented. View where you can see Reservation Data)
+- 0.50 Edit time error 
+- 0.15 Not checking in server side user number of seats reservation before adding new reservation reservation_post()
 
 
+Additional functionality: 
++2 Ajax implementation
+@manager_only wrapper (elegant solution)
++1 Nice Views
 
-Scripts provided:
-virtual.sh: Create the virtual environment
-run.sh: Run on development mode our application
-insert.sql: The insertions we have introduced  
+Total: 11 or 10.85
+
+
+Project (50%):
+    - Mandatory functionality: 6.85 out of 7.50
+    - Additional functionality: 4.00 out of 2.50
+    - Total: 10.00 out of 10.00

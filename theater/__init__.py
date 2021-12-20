@@ -11,8 +11,8 @@ def create_app(test_config=None):
 
     # set configuration variables
     app.config["SECRET_KEY"] = b"\x8c\xa5\x04\xb3\x8f\xa1<\xef\x9bY\xca/*\xff\x12\xfb"
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myDB.db' #path to database and its name
-    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://22_appweb_31:9JoOBTaL@mysql.lab.it.uc3m.es/22_appweb_31c"
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myDB.db' #path to database and its name
+    # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://22_appweb_31:9JoOBTaL@mysql.lab.it.uc3m.es/22_appweb_31c"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to supress warnings
     
     # register db to the current app
