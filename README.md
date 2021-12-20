@@ -9,8 +9,8 @@
     <th>Login</th>
   </tr>
   <tr>
-    <td><img src="views/signup.png"></td>
-    <td><img src="views/login.png"></td>
+    <td><img src="screenshots/signup.png"></td>
+    <td><img src="screenshots/login.png"></td>
   </tr>
  </table>
 
@@ -21,9 +21,9 @@
     <th>Info</th>
   </tr>
   <tr>
-    <td><img src="views/success.png"></td>
-    <td><img src="views/error.png"></td>
-    <td><img src="views/info.png"></td>
+    <td><img src="screenshots/success.png"></td>
+    <td><img src="screenshots/error.png"></td>
+    <td><img src="screenshots/info.png"></td>
   </tr>
  </table>
 
@@ -32,6 +32,6 @@
     <th>Home</th>
   </tr>
   <tr>
-    <td><img src="views/home.png"></td>
+    <td><img src="screenshots/home.png"></td>
   </tr>
  </table>
