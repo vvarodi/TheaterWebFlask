@@ -11,8 +11,8 @@
   <summary>Table of Contents</summary>
   <ul>
     <li><a href="#project-description">Project Description</a></li>
-    <li><a href="#technology">Technology</a></li>
     <li><a href="#theater-app-screenshots">Theater App Screenshots</a></li>
+    <li><a href="#technology">Technology</a></li>
   </ul>
 </details>
 
@@ -23,17 +23,6 @@ This project is developed as part of the Evaluation of the Web Applications Cour
 You can find the [Course Web Site](https://www.it.uc3m.es/jaf/wa/).
 
 <a href="ProjectStatement.html">Project Statement</a>: [Movie Theater](https://www.it.uc3m.es/jaf/wa/labs/project/).
-
-## Technology
-- Backend:
-  * Python
-  * Flask Framework
-  * SQLAlchemy
-- Fronted:
-  * HTML
-  * CSS
-  * JavaScipt + JQuery + AJAX
-
 
 ## Theater App Screenshots
 
@@ -105,3 +94,12 @@ You can find the [Course Web Site](https://www.it.uc3m.es/jaf/wa/).
   </tr>
 </table>
 
+## Technology
+- Backend:
+  * Python
+  * Flask Framework
+  * SQLAlchemy
+- Fronted:
+  * HTML
+  * CSS
+  * JavaScipt + JQuery + AJAX
