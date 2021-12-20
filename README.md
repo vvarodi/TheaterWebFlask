@@ -11,8 +11,8 @@
   <summary>Table of Contents</summary>
   <ul>
     <li><a href="#project-description">Project Description</a></li>
-    <li><a href="#theater-app-screenshots">Theater App Screenshots</a></li>
     <li><a href="#technology">Technology</a></li>
+    <li><a href="#theater-app-screenshots">Theater App Screenshots</a></li>
   </ul>
 </details>
 
@@ -20,26 +20,33 @@
 ## Project Description
 This project is developed as part of the Evaluation of the Web Applications Course at UC3M. 
 
-You can find the Course Web Site: https://www.it.uc3m.es/jaf/wa/
+You can find the [Course Web Site](https://www.it.uc3m.es/jaf/wa/).
 
-Project Statement: 
-- https://www.it.uc3m.es/jaf/wa/labs/project/
-- <a href="ProjectStatement.html">Project Statement</a>
+<a href="ProjectStatement.html">Project Statement</a>: [Movie Theater](https://www.it.uc3m.es/jaf/wa/labs/project/).
+
+## Technology
+- Backend:
+  * Python
+  * Flask Framework
+  * SQLAlchemy
+- Fronted:
+  * HTML
+  * CSS
+  * JavaScipt + JQuery
 
 
-<details open="open">
-    <summary><h2>Theater App Screenshots</h2></summary>
-    
+## Theater App Screenshots
+
 <table>
-<tr>
+  <tr>
     <th>Sign Up</th>
     <th>Login</th>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td><img src="screenshots/signup.png"></td>
     <td><img src="screenshots/login.png"></td>
-</tr>
-</table>
+  </tr>
+ </table>
 
 <table>
   <tr>
@@ -62,4 +69,39 @@ Project Statement:
     <td><img src="screenshots/home.png"></td>
   </tr>
  </table>
-</details>
+
+
+<table>
+  <tr>
+    <th>Movie View</th>
+    <th>Buy Ticket</th>
+  </tr>
+  <tr>
+    <td><img src="screenshots/movie.png"></td>
+    <td><img src="screenshots/buyTicket.png"></td>
+  </tr>
+ </table>
+
+<table>
+  <tr>
+    <th>Manager Reservations View</th>
+    <th>Manager Edit View</th>
+  </tr>
+  <tr>
+    <td><img src="screenshots/reservations.png"></td>
+    <td><img src="screenshots/edit.png"></td>
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <th>Add Projection</th>
+    <th>Edit Projection</th>
+  </tr>
+  <tr>
+    <td><img src="screenshots/add.png"></td>
+    <td><img src="screenshots/edit-projection.png"></td>
+  </tr>
+</table>
+
