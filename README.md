@@ -32,7 +32,7 @@ You can find the [Course Web Site](https://www.it.uc3m.es/jaf/wa/).
 - Fronted:
   * HTML
   * CSS
-  * JavaScipt + JQuery
+  * JavaScipt + JQuery + AJAX
 
 
 ## Theater App Screenshots
